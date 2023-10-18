@@ -18,8 +18,7 @@ const Hero = () => {
             </div>
             {/* title */}
             <h1
-              className="text-[70px] leading-[1.1] font-light
-      mb-4"
+              className="text-[70px] leading-[1.1] font-light mb-4"
             >
               Clothify <br />
               <span className="font-semibold">WOMENS</span>

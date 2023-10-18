@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 //icons
 import { BsBag } from "react-icons/bs";
 import Logo from "../img/logo.svg";
+//import search icon
+import { AiOutlineSearch } from "react-icons/ai";
 
 const Header = () => {
   //headerstate
@@ -133,10 +135,7 @@ const Header = () => {
           </a>
         </div>
         <div className="grid-line"></div>
-        <div
-          className="container mx-auto flex items-center
-      justify-between h-full py-2"
-        >
+        <div className="container mx-auto flex justify-between items-center h-full py-2">
           {/* logo */}
           <Link to={"/"}>
             <img className="w-[40px]" src={Logo} alt="" />
@@ -150,7 +149,22 @@ const Header = () => {
               </Link>
             ))}
           </div>
-          
+          {/* justify end search and cart */}
+
+          {/* search bar */}
+          <form className="w-[300px] relative">
+            <div className="relative">
+              <input
+                type="search"
+                placeholder="Seach"
+                className="w-full p-2 rounded-full bg-white-800"
+              />
+              <button className="absolute right-1 top-1/2 -translate-y-1/2 p-2 bg-white rounded-full">
+                <AiOutlineSearch />
+              </button>
+            </div>
+            <div className="absolute top-20 p-4 bg-slate-800 text-white w-full rounded-xl left-1/2 -translate-x-1/2 flex flex-col gap-2"></div>
+          </form>
           {/* cart */}
           <div
             onClick={() => setIsOpen(!isOpen)}

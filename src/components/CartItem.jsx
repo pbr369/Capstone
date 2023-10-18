@@ -7,7 +7,7 @@ const CartItem = ({ item }) => {
   const { removeFromCart, increaseAmount, decreaseAmount } =
     useContext(CartContext);
 
-  const { id, title, image, price, amount } = item;
+  const { id, title, images, price, amount } = item;
   return (
     <div
       className="flex gap-x-4 py-2 lg:px-6 border-b border-gray-200
@@ -19,7 +19,7 @@ const CartItem = ({ item }) => {
       >
         {/* image */}
         <Link to={`/product/${id}`}>
-          <img className="max-w-[80px]" src={image} alt="" />
+          <img className="max-w-[80px]" src={images} alt="" />
         </Link>
         <div className="w-full flex flex-col">
           {/* title and remove ico */}

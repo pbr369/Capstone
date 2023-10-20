@@ -29,23 +29,23 @@ const Header = () => {
       },
       {
         title: "Men",
-        link: "/blogs",
+        link: "/Men",
       },
       {
         title: "Women",
-        link: "/about",
+        link: "/Women",
       },
       {
         title: "Kids",
-        link: "/contact",
+        link: "/Kids",
       },
       {
         title: "Shoes",
-        link: "/contact",
+        link: "/Shoes",
       },
       {
         title: "Jewelry",
-        link: "/contact",
+        link: "/Jewelry",
       },
     ];
 
@@ -163,7 +163,9 @@ const Header = () => {
                 <AiOutlineSearch />
               </button>
             </div>
-            <div className="absolute top-20 p-4 bg-slate-800 text-white w-full rounded-xl left-1/2 -translate-x-1/2 flex flex-col gap-2"></div>
+            {/* <div className="absolute top-20 p-4 bg-slate-800 
+            text-white w-full rounded-xl left-1/2 -translate-x-1/2 flex flex-col gap-2">
+            </div> */}
           </form>
           {/* cart */}
           <div

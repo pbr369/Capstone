@@ -11,7 +11,7 @@ import { SidebarContext } from "../contexts/SidebarContext";
 //cart context
 import { CartContext } from "../contexts/CartContext";
 
-const Sidebar = () => {
+export default function Sidebar() {
   const { isOpen, handleClose } = useContext(SidebarContext);
   const { cart, clearCart, total, itemAmount } = useContext(CartContext);
   return (
@@ -86,4 +86,3 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;

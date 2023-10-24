@@ -23,7 +23,7 @@ if (!product){
 }
 
 //destructure product
-const {title, price, description, images} = product;
+const {title, price, description, image} = product;
   return (
     <section className="pt-32 pb-12 lg:py-32 h-screen flex items-center">
       <div className="container mx-auto">
@@ -31,7 +31,7 @@ const {title, price, description, images} = product;
         <div className="flex flex-col lg:flex-row items-center">
           {/* image */}
           <div className="flex flex-1 justify-center items-center mb-8 lg:mb-0">
-            <img className="max-w-[200px] lg:max-w-sm" src={images[0]} alt="" />
+            <img className="max-w-[200px] lg:max-w-sm" src={image} alt="" />
           </div>
           {/* text */}
           <div className="flex-1 text-center lg:text-left">

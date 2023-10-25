@@ -17,12 +17,6 @@ const Header = () => {
   const { itemAmount } = useContext(CartContext);
   //event listener
 
-  //search
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      window.scrollY > 60 ? setIsActive(true) : setIsActive(false);
-    });
-  });
 
   //bagong add
     const menuItems = [
@@ -105,11 +99,14 @@ const Header = () => {
             </div> */}
           </form>
           {/* cart */}
-
+            
           <div className="cursor-pointer flex relative">
             <div className="px-3">
-              <FaRegUser className="text-2xl text-white" />
+            <Link to = "/Login"><FaRegUser className="text-2xl text-white" /></Link>
             </div>
+
+        
+
             <BsBag
               onClick={() => setIsOpen(!isOpen)}
               className="text-2xl text-white"
@@ -123,7 +120,9 @@ const Header = () => {
             </div>
           </div>
         </div>
-      </div>
+        
+       </div>
+       
     </>
   );
 };

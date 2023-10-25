@@ -7,6 +7,7 @@ import ProductDetails from "./pages/ProductDetails";
 import Men from "./pages/Men";
 import Women from "./pages/Women"
 import Jewelery from "./pages/Jewelery";
+
 //components
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Navbar";
@@ -14,7 +15,7 @@ import Footer from "./components/Footer";
 
 const App = () => {
   return (
-    <div className="overflow-hidden">
+ <div>
       <Router>
         <Header />
         <Routes>

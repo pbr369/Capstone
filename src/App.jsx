@@ -7,6 +7,10 @@ import ProductDetails from "./pages/ProductDetails";
 import Men from "./pages/Men";
 import Women from "./pages/Women"
 import Jewelery from "./pages/Jewelery";
+import Login from "./pages/Login";
+import Register from "./pages/Register"
+
+
 
 //components
 import Sidebar from "./components/Sidebar";
@@ -23,6 +27,8 @@ const App = () => {
           <Route path ="/Men" element={<Men />} />
           <Route path ="/Women" element={<Women />} />
           <Route path ="/Jewelery" element={<Jewelery />} />
+          <Route path ="/Login" element={<Login />} />
+          <Route path ="/Register" element={<Register />} />
           <Route path="product/:id" element={<ProductDetails />} />
         </Routes>
         <Sidebar />

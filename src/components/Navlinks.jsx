@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { links } from "./Mylinks";
 import { IonIcon } from "@ionic/react";
 
-const NavLinks = () => {
+export default function NavLinks() {
   const [heading, setHeading] = useState("");
   const [subHeading, setSubHeading] = useState("");
   return (
@@ -110,5 +110,3 @@ const NavLinks = () => {
     </>
   );
 };
-
-export default NavLinks;

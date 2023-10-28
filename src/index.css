@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -39,4 +40,12 @@
 
 .bg-black-navbar {
     background-color: #1D1D1D;
+}
+
+.bg-footer {
+  background-color: #F0F0F0;
+}
+
+.btn-color {
+  background-color: #1D1D1D;
 }

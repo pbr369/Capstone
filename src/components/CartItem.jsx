@@ -2,12 +2,14 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { IoMdAdd, IoMdClose, IoMdRemove } from "react-icons/io";
 import { CartContext } from "../contexts/CartContext";
+import Dialog from "../components/Dialog";
 
-const CartItem = ({ item }) => {
+export default function CartItem({ item }) {
   const { removeFromCart, increaseAmount, decreaseAmount } =
     useContext(CartContext);
 
   const { id, title, image, price, amount } = item;
+
   return (
     <div
       className="flex gap-x-4 py-2 lg:px-6 border-b border-gray-200
@@ -95,5 +97,3 @@ const CartItem = ({ item }) => {
     </div>
   );
 };
-
-export default CartItem;

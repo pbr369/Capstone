@@ -8,9 +8,16 @@ import { BsBag } from "react-icons/bs";
 import Logo from "../img/logo.svg";
 //import search icon
 import { AiOutlineSearch } from "react-icons/ai";
-import { FaRegUser } from "react-icons/fa";
-//
-const Header = () => {
+import { FaRegUser, FaRegHeart } from "react-icons/fa";
+import { RxHamburgerMenu } from "react-icons/rx";
+//redux
+import { useDispatch } from "react-redux";
+//import searchbar
+import SearchBar from "./SearchBar";
+import Search from "./Search";
+import Login from "../pages/Login";
+
+export default function Navbar() {
   //headerstate
   const [isActive, setIsActive] = useState(true);
   const { isOpen, setIsOpen } = useContext(SidebarContext);
@@ -18,43 +25,46 @@ const Header = () => {
   //event listener
 
   //search
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      window.scrollY > 60 ? setIsActive(true) : setIsActive(false);
-    });
+  const [state, setState] = useState({
+    results: [],
   });
 
-  //bagong add
-    const menuItems = [
-      {
-        title: "New & Featured",
-        link: "/",
-      },
-      {
-        title: "Men",
-        link: "/Men",
-      },
-      {
-        title: "Women",
-        link: "/Women",
-      },
-      {
-        title: "Kids",
-        link: "/Kids",
-      },
-      {
-        title: "Shoes",
-        link: "/Shoes",
-      },
-      {
-        title: "Jewelry",
-        link: "/Jewelry",
-      },
-    ];
+  const onSearch = async (text) => {
+    setState((prevState) => {
+      return { ...prevState, results: results };
+    });
+  };
 
+  //modal
+  const [modalOpen, setModalOpen] = useState(false);
+
+  // Modal toggle function
+  const toggleModal = () => {
+    setModalOpen(!modalOpen);
+  };
+
+  //bagong add
+  const menuItems = [
+    {
+      title: "Featured",
+      link: "/",
+    },
+    {
+      title: "Men",
+      link: "/Men",
+    },
+    {
+      title: "Women",
+      link: "/Women",
+    },
+    {
+      title: "Jewelry",
+      link: "/Jewelry",
+    },
+  ];
 
   return (
-    <>
+    <div>
       <div
         className="bg-black-navbar shadow-md bg-none
     fixed w-full z-10 transition-all"
@@ -74,7 +84,7 @@ const Header = () => {
           </Link>
           {/* add menus */}
 
-          <div className="nav-mid flex gap-7 text-white text-lg">
+          <div className="nav-mid flex gap-7 text-white text-lg hidden lg:flex px-4 mx-auto font-semibold font-heading space-x-12">
             {menuItems.map((item, idx) => (
               <Link key={idx} to={item.link}>
                 {item.title}
@@ -84,48 +94,51 @@ const Header = () => {
           {/* justify end search and cart */}
 
           {/* search bar */}
-          <form className="w-[300px] relative">
-            <div className="relative">
-              <input
-                type="search"
-                id="searchInput"
-                placeholder="Seach"
-                className="w-full p-2 rounded-full bg-white-800"
-              />
-              <button className="absolute right-1 top-1/2 -translate-y-1/2 p-2 bg-white rounded-full">
-                <AiOutlineSearch
-                  onClick={(event) => {
-                    setSearchTerm(event.target.value);
-                  }}
-                />
-              </button>
-            </div>
-            {/* <div className="absolute top-20 p-4 bg-slate-800 
-            text-white w-full rounded-xl left-1/2 -translate-x-1/2 flex flex-col gap-2">
-            </div> */}
-          </form>
+          <div className="hidden lg:flex">
+            <SearchBar onSearch={onSearch} />
+          </div>
           {/* cart */}
 
+          {/* reg */}
           <div className="cursor-pointer flex relative">
-            <div className="px-3">
-              <FaRegUser className="text-2xl text-white" />
+            <div className="px-2">
+              <FaRegUser
+                onClick={toggleModal}
+                className="text-2xl text-white"
+              />
             </div>
-            <BsBag
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-2xl text-white"
-            />
-            <div
-              className="bg-red-500 absolute -right-2 -bottom-2
+            {/* wishlist */}
+            <div className="px-2">
+              <FaRegHeart className="text-2xl text-white" />
+            </div>
+            {/* bag */}
+            <div className="px-2" onClick={() => setIsOpen(!isOpen)}>
+              <BsBag className="text-2xl text-white" />
+              <div
+                className="animate-bounce bg-red-500 absolute right-9 -bottom-1
         text-[12px] w-[18px] h-[18px] text-white rounded-full flex
         justify-center items-center"
-            >
-              {itemAmount}
+              >
+                {itemAmount}
+              </div>
+            </div>
+            <div className="">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                x="0px"
+                y="0px"
+                width="30"
+                height="30"
+                viewBox="0 0 50 50"
+                className="fill-white"
+              >
+                <path d="M 5 8 A 2.0002 2.0002 0 1 0 5 12 L 45 12 A 2.0002 2.0002 0 1 0 45 8 L 5 8 z M 5 23 A 2.0002 2.0002 0 1 0 5 27 L 45 27 A 2.0002 2.0002 0 1 0 45 23 L 5 23 z M 5 38 A 2.0002 2.0002 0 1 0 5 42 L 45 42 A 2.0002 2.0002 0 1 0 45 38 L 5 38 z"></path>
+              </svg>
             </div>
           </div>
         </div>
       </div>
-    </>
+      {modalOpen && <Login closeLoginModal={toggleModal} />}
+    </div>
   );
 };
-
-export default Header;

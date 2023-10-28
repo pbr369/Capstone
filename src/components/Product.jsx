@@ -1,12 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsPlus, BsEyeFill } from "react-icons/bs";
 import { CartContext } from "../contexts/CartContext";
+import Star from "../components/Star";
+import SearchBar from "../components/SearchBar";
+//search
+import { useSelector } from "react-redux";
+import Search from "./Search";
 
-const Product = ({ product }) => {
+export default function Product({ product }) {
   const { addToCart } = useContext(CartContext);
   //
-  const { id, image, category, title, price } = product;
+  const { id, image, category, title, price, rating } = product;
+  //search function
+  const [searchTerm, setSearchTerm] = useState("");
   return (
     <div>
       <div
@@ -58,10 +65,9 @@ const Product = ({ product }) => {
         <Link to={`/product/${id}`}>
           <h2 className="font-semibold mb-1">{title}</h2>
         </Link>
+        <Star stars={rating.rate} reviews={rating.count}></Star>
         <div className="font-semibold">${price}</div>
       </div>
     </div>
   );
-};
-
-export default Product;
+}

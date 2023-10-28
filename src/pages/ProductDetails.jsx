@@ -2,8 +2,9 @@ import React, {useContext} from 'react';
 import{useParams} from 'react-router-dom';
 import { CartContext } from '../contexts/CartContext';
 import { ProductContext } from '../contexts/ProductContext';
+import Star from "../components/Star";
 
-const ProductDetails = () => {
+export default function ProductDetails() {
   //get the product id from url
   const {id} = useParams();
   const {products} = useContext(ProductContext);
@@ -23,7 +24,7 @@ if (!product){
 }
 
 //destructure product
-const {title, price, description, image} = product;
+const {title, price, description, image, rating} = product;
   return (
     <section className="pt-32 pb-12 lg:py-32 h-screen flex items-center">
       <div className="container mx-auto">
@@ -44,6 +45,7 @@ const {title, price, description, image} = product;
             <div className="text-xl text-red-500 font-medium mb-6">
               $ {price}
             </div>
+            <Star stars={rating.rate} reviews={rating.count}></Star>
             <p className="mb-8">{description}</p>
             <button
               onClick={() => addToCart(product, product.id)}
@@ -57,5 +59,3 @@ const {title, price, description, image} = product;
     </section>
   );
 };
-
-export default ProductDetails;

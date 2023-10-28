@@ -1,14 +1,18 @@
 import React, { createContext, useState, useEffect } from "react";
 
-import Data from "../database/database";
 
 export const ProductContext = createContext();
 
-const ProductProvider = ({ children }) => {
+export default function ProductProvider({ children }) {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    setProducts(Data);
+    const fetchProducts = async () => {
+      const response = await fetch("https://fakestoreapi.com/products");
+      const data = await response.json();
+      setProducts(data);
+    };
+    fetchProducts();
   }, []);
   return (
     <ProductContext.Provider value={{ products }}>
@@ -16,5 +20,3 @@ const ProductProvider = ({ children }) => {
     </ProductContext.Provider>
   );
 };
-
-export default ProductProvider;

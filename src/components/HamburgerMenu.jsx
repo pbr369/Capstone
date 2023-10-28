@@ -10,9 +10,9 @@ import CartItem from "./CartItem";
 import { SidebarContext } from "../contexts/SidebarContext";
 //cart context
 import { CartContext } from "../contexts/CartContext";
-import Dialog from "../components/Dialog";
+import Dialog from "./Dialog";
 
-export default function Sidebar() {
+export default function HamburgerMenu() {
   const { isOpen, handleClose } = useContext(SidebarContext);
   const { cart, clearCart, total, itemAmount, handleDelete } =
     useContext(CartContext);

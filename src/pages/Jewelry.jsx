@@ -3,7 +3,7 @@ import { ProductContext } from "../contexts/ProductContext";
 import Product from "../components/Product";
 import Hero from "../components/HeroJewelery";
 
-const Jewelery = () => {
+export default function Jewelery() {
   const { products } = useContext(ProductContext);
 
   const filteredProducts = products.filter((item) => {
@@ -31,5 +31,3 @@ const Jewelery = () => {
     </div>
   );
 };
-
-export default Jewelery;

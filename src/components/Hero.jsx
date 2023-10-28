@@ -21,7 +21,7 @@ export default function Hero() {
               className="text-[70px] leading-[1.1]  mb-4 text-white"
             >
               Clothify <br />
-              <span className="font-semibold text-white">WOMENS</span>
+              <span className="font-semibold text-white">NEW ARRIVALS</span>
             </h1>
             <Link
               to={"/"}

@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
 import Men from "./pages/Men";
 import Women from "./pages/Women"
-import Jewelry from "./pages/Jewelry";
+import Jewelery from "./pages/Jewelery";
 //components
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Navbar";
@@ -17,7 +17,7 @@ import Register from "./pages/Register";
 
 export default function App() {
   return (
-    <div className="overflow-hidden">
+ <div>
       <Router>
         <Header />
         <Routes>

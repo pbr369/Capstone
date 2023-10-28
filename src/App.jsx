@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
 import Men from "./pages/Men";
 import Women from "./pages/Women"
-import Jewelery from "./pages/Jewelery";
+import Jewelry from "./pages/Jewelry";
 //components
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Navbar";

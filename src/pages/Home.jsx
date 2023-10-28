@@ -4,6 +4,7 @@ import Product from "../components/Product";
 import Hero from "../components/Hero";
 import Search from "../components/Search";
 import Middle from "../components/Middle";
+import FacebookMsgr from "../components/FacebookChat";
 
 export default function Home() {
   const { products } = useContext(ProductContext);
@@ -25,6 +26,7 @@ export default function Home() {
 
   return (
     <div>
+      <FacebookMsgr />
       <Hero />
       <Middle />
       {/* <Search results={state.results} /> */}

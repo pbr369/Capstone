@@ -84,7 +84,7 @@ export default function NewArrivals() {
               alt=""
             />
           </div>
-          <div className="absolute bottom-0 z-20 m-0 mx-5 pb-4 ps-4 transition duration-300 ease-in-out group-hover:-translate-y-1 group-hover:translate-x-12 group-hover:scale-110">
+          <div className="absolute bottom-0 m-0 mx-5 pb-4 ps-4 transition duration-300 ease-in-out group-hover:-translate-y-1 group-hover:translate-x-12 group-hover:scale-110">
             <div className="text-5xl text-white font-bold">MEMBER</div>
             <div className="text-5xl text-white font-bold">EXCLUSIVE</div>
             {/* <h1 className="font-serif text-2xl font-bold text-white shadow-xl">

@@ -8,11 +8,11 @@ export default function Star({ stars, reviews }) {
     return (
       <span key={index}>
         {stars >= index + 1 ? (
-          <FaStar className="icon" />
+          <FaStar className="icon fill-yellow-400" />
         ) : stars >= number ? (
-          <FaStarHalfAlt className="icon" />
+          <FaStarHalfAlt className="icon fill-yellow-400" />
         ) : (
-          <FaRegStar className="icon" />
+          <FaRegStar className="icon fill-yellow-400" />
         )}
       </span>
     );

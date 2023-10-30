@@ -4,6 +4,15 @@ import featuredwomen from "../img/featuredwomen.png";
 import womenjewelry from "../img/womenjewelry.png";
 import imgdisc from "../img/25disc.png";
 import { Link } from "react-router-dom";
+//import images
+import midmen1 from "../img/mid-men1.png"
+import midmen2 from "../img/mid-men2.png";
+import midmen3 from "../img/mid-men3.png";
+import midmen4 from "../img/mid-men4.png";
+import midwomen1 from "../img/mid-women1.png";
+import midwomen2 from "../img/mid-women2.png";
+import midwomen3 from "../img/mid-women3.png";
+import midwomen4 from "../img/mid-women4.png";
 
 export default function NewArrivals() {
   return (
@@ -100,6 +109,56 @@ export default function NewArrivals() {
             <button class="bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
               <Link to={`/Register`}>Register Now</Link>
             </button>
+          </div>
+        </div>
+      </div>
+      <div className="container mx-auto">
+        <div>
+          <h2 className="text-2xl font-extrabold text-gray-900 mb-5 mt-5">
+            Shop Men's Fashion
+          </h2>
+        </div>
+        <div
+          className="grid grid-cols-2 md:grid-cols-2
+        lg:grid-cols-3 xl:grid-cols-4 gap-[30px] max-w-sm mx-auto
+        md:max-w-none md:mx-0"
+        >
+          <div className="grid-item1 border-2 border-[#e4e4e4] h-auto middle-card-bg">
+            <img src={midmen1} alt="" />
+          </div>
+          <div className="grid-item2 border-2 border-[#e4e4e4] h-auto middle-card-bg">
+            <img src={midmen2} alt="" />
+          </div>
+          <div className="grid-item3 border-2 border-[#e4e4e4] h-auto middle-card-bg">
+            <img src={midmen3} alt="" />
+          </div>
+          <div className="grid-item4 border-2 border-[#e4e4e4] h-auto middle-card-bg">
+            <img src={midmen4} alt="" />
+          </div>
+        </div>
+      </div>
+      <div className="container mx-auto">
+        <div>
+          <h2 className="text-2xl font-extrabold text-gray-900 mb-5 mt-10">
+            Shop Women's Fashion
+          </h2>
+        </div>
+        <div
+          className="grid grid-cols-2 md:grid-cols-2
+        lg:grid-cols-3 xl:grid-cols-4 gap-[30px] max-w-sm mx-auto
+        md:max-w-none md:mx-0"
+        >
+          <div className="grid-item1 border-2 border-[#e4e4e4] h-auto middle-card-bg">
+            <img src={midwomen1} alt="" />
+          </div>
+          <div className="grid-item2 border-2 border-[#e4e4e4] h-auto middle-card-bg">
+            <img src={midwomen2} alt="" />
+          </div>
+          <div className="grid-item3 border-2 border-[#e4e4e4] h-auto middle-card-bg">
+            <img src={midwomen3} alt="" />
+          </div>
+          <div className="grid-item4 border-2 border-[#e4e4e4] h-auto middle-card-bg">
+            <img src={midwomen4} alt="" />
           </div>
         </div>
       </div>

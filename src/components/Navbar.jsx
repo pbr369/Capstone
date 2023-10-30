@@ -115,14 +115,14 @@ export default function Navbar() {
             <div className="px-2" onClick={() => setIsOpen(!isOpen)}>
               <BsBag className="text-2xl text-white" />
               <div
-                className="animate-bounce bg-red-500 absolute right-9 -bottom-1
+                className="animate-bounce bg-red-500 absolute right-1 -bottom-1
         text-[12px] w-[18px] h-[18px] text-white rounded-full flex
         justify-center items-center"
               >
                 {itemAmount}
               </div>
             </div>
-            <div className="">
+            <div className="lg:hidden absolute -top-[2px] -right-8">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"

@@ -123,16 +123,16 @@ export default function NewArrivals() {
         lg:grid-cols-3 xl:grid-cols-4 gap-[30px] max-w-sm mx-auto
         md:max-w-none md:mx-0"
         >
-          <div className="grid-item1 border-2 border-[#e4e4e4] h-auto middle-card-bg">
+          <div className="grid-item1 border-2 border-[#e4e4e4] h-auto">
             <img src={midmen1} alt="" />
           </div>
-          <div className="grid-item2 border-2 border-[#e4e4e4] h-auto middle-card-bg">
+          <div className="grid-item2 border-2 border-[#e4e4e4] h-auto">
             <img src={midmen2} alt="" />
           </div>
-          <div className="grid-item3 border-2 border-[#e4e4e4] h-auto middle-card-bg">
+          <div className="grid-item3 border-2 border-[#e4e4e4] h-auto">
             <img src={midmen3} alt="" />
           </div>
-          <div className="grid-item4 border-2 border-[#e4e4e4] h-auto middle-card-bg">
+          <div className="grid-item4 border-2 border-[#e4e4e4] h-auto">
             <img src={midmen4} alt="" />
           </div>
         </div>
@@ -148,16 +148,16 @@ export default function NewArrivals() {
         lg:grid-cols-3 xl:grid-cols-4 gap-[30px] max-w-sm mx-auto
         md:max-w-none md:mx-0"
         >
-          <div className="grid-item1 border-2 border-[#e4e4e4] h-full middle-card-bg">
+          <div className="grid-item1 border-2 border-[#e4e4e4] h-full">
             <img src={midwomen1} alt="" />
           </div>
-          <div className="grid-item2 border-2 border-[#e4e4e4] h-full middle-card-bg">
+          <div className="grid-item2 border-2 border-[#e4e4e4] h-full">
             <img src={midwomen2} alt="" />
           </div>
-          <div className="grid-item3 border-2 border-[#e4e4e4] h-full middle-card-bg">
+          <div className="grid-item3 border-2 border-[#e4e4e4] h-full">
             <img src={midwomen3} alt="" />
           </div>
-          <div className="grid-item4 border-2 border-[#e4e4e4] h-full middle-card-bg">
+          <div className="grid-item4 border-2 border-[#e4e4e4] h-full">
             <img src={midwomen4} alt="" />
           </div>
         </div>

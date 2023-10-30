@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="container px-6 py-12 mx-auto">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-y-10 lg:grid-cols-4">
           <div className="sm:col-span-2">
-            <h1 className="max-w-lg text-xl font-semibold tracking-tight text-gray-800 xl:text-2xl dark:text-white">
+            <h1 className="max-w-lg text-xl font-semibold tracking-tight text-black xl:text-2xl dark:text-black">
               Subscribe to our newsletter to get vouchers.
             </h1>
 
@@ -29,26 +29,26 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="font-semibold text-gray-800 dark:text-white">
+            <p className="font-semibold text-gray-800 dark:text-black">
               Quick Link
             </p>
 
             <div className="flex flex-col items-start mt-5 space-y-2">
               <a
                 href="/"
-                className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                className="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
                 Home
               </a>
               <a
                 href="/"
-                className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                className="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
                 About us
               </a>
               <a
                 href="/"
-                className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                className="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
                 Blogs
               </a>
@@ -56,26 +56,26 @@ export default function Footer() {
           </div>
 
           <div>
-            <p className="font-semibold text-gray-800 dark:text-white">
+            <p className="font-semibold text-gray-800 dark:text-black">
               Categories
             </p>
 
             <div className="flex flex-col items-start mt-5 space-y-2">
               <a
                 href="/"
-                className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                className="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
                 Men
               </a>
               <a
                 href="/"
-                className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                className="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
                 Women
               </a>
               <a
                 href="/"
-                className="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+                className="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
                 Jewelry
               </a>
@@ -93,7 +93,7 @@ export default function Footer() {
           <div className="flex -mx-2">
             <a
               href="/"
-              className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+              className="mx-2 text-gray-600 transition-colors duration-300 dark:text-black hover:text-blue-500 dark:hover:text-blue-400"
               aria-label="Facebook"
             >
               <svg
@@ -111,7 +111,7 @@ export default function Footer() {
 
             <a
               href="/"
-              className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+              className="mx-2 text-gray-600 transition-colors duration-300 dark:text-black hover:text-blue-500 dark:hover:text-blue-400"
               aria-label="X Twitter"
             >
               <svg
@@ -127,7 +127,7 @@ export default function Footer() {
 
             <a
               href="/"
-              className="mx-2 text-gray-600 transition-colors duration-300 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+              className="mx-2 text-gray-600 transition-colors duration-300 dark:text-black hover:text-blue-500 dark:hover:text-blue-400"
               aria-label="Instagram"
             >
               <svg

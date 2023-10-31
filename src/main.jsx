@@ -4,6 +4,7 @@ import "./index.css";
 import App from "./App";
 import ProductProvider from "./contexts/ProductContext";
 import SidebarProvider from "./contexts/SidebarContext";
+import WishListProvider from "./contexts/WishListContext";
 import CartProvider from "./contexts/CartContext";
 import { Provider } from "react-redux";
 
@@ -12,9 +13,11 @@ root.render(
   <SidebarProvider>
     <CartProvider>
       <ProductProvider>
-        <React.StrictMode>
+        <WishListProvider>
+          <React.StrictMode>
             <App />
-        </React.StrictMode>
+          </React.StrictMode>
+        </WishListProvider>
       </ProductProvider>
     </CartProvider>
   </SidebarProvider>

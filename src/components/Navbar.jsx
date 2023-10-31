@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 //
 import { SidebarContext } from "../contexts/SidebarContext";
+import { WishListContext } from "../contexts/WishListContext";
 import { CartContext } from "../contexts/CartContext";
 import { Link } from "react-router-dom";
 //icons
@@ -21,6 +22,7 @@ export default function Navbar() {
   //headerstate
   const [isActive, setIsActive] = useState(true);
   const { isOpen, setIsOpen } = useContext(SidebarContext);
+  const { wishlistOpen, setWishlistOpen } = useContext(WishListContext);
   const { itemAmount } = useContext(CartContext);
   //event listener
 
@@ -108,7 +110,10 @@ export default function Navbar() {
               />
             </div>
             {/* wishlist */}
-            <div className="px-2">
+            <div
+              className="px-2"
+              onClick={() => setWishlistOpen(!wishlistOpen)}
+            >
               <FaRegHeart className="text-2xl text-white" />
             </div>
             {/* bag */}

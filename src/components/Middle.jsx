@@ -96,9 +96,6 @@ export default function NewArrivals() {
           <div className="absolute bottom-0 m-0 mx-5 pb-4 ps-4 transition duration-300 ease-in-out group-hover:-translate-y-1 group-hover:translate-x-12 group-hover:scale-110">
             <div className="text-5xl text-white font-bold">MEMBER</div>
             <div className="text-5xl text-white font-bold">EXCLUSIVE</div>
-            {/* <h1 className="font-serif text-2xl font-bold text-white shadow-xl">
-              Azores
-            </h1> */}
             <div className="text-sm font-light text-gray-200 grid grid-cols-1 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-3">
               <div className="grid-item1 mb-3">
                 We’re making it easy for Clothify Rewards members to get a head
@@ -106,13 +103,13 @@ export default function NewArrivals() {
                 apply at checkout.
               </div>
             </div>
-            <button class="bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+            <button className="bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
               <Link to={`/Register`}>Register Now</Link>
             </button>
           </div>
         </div>
       </div>
-      <div className="container mx-auto">
+      <div className="container mx-auto mb-10">
         <div>
           <h2 className="text-2xl font-extrabold text-gray-900 mb-5 mt-5">
             Shop Men's Fashion
@@ -123,21 +120,33 @@ export default function NewArrivals() {
         lg:grid-cols-3 xl:grid-cols-4 gap-[30px] max-w-sm mx-auto
         md:max-w-none md:mx-0"
         >
-          <div className="grid-item1 border-2 border-[#e4e4e4] h-auto">
+          <div className="relative grid-item1 border-2 border-[#e4e4e4] h-auto">
             <img src={midmen1} alt="" />
+            <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+              <Link to={`/Men`}>Shop Men</Link>
+            </button>
           </div>
-          <div className="grid-item2 border-2 border-[#e4e4e4] h-auto">
+          <div className="relative grid-item2 border-2 border-[#e4e4e4] h-auto">
             <img src={midmen2} alt="" />
+            <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+              <Link to={`/Men`}>Shop Men</Link>
+            </button>
           </div>
-          <div className="grid-item3 border-2 border-[#e4e4e4] h-auto">
+          <div className="relative grid-item3 border-2 border-[#e4e4e4] h-auto">
             <img src={midmen3} alt="" />
+            <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+              <Link to={`/Men`}>Shop Men</Link>
+            </button>
           </div>
-          <div className="grid-item4 border-2 border-[#e4e4e4] h-auto">
+          <div className="relative grid-item4 border-2 border-[#e4e4e4] h-auto">
             <img src={midmen4} alt="" />
+            <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+              <Link to={`/Men`}>Shop Men</Link>
+            </button>
           </div>
         </div>
       </div>
-      <div className="container mx-auto">
+      <div className="container mx-auto mb-10">
         <div>
           <h2 className="text-2xl font-extrabold text-gray-900 mb-5 mt-10">
             Shop Women's Fashion
@@ -148,17 +157,29 @@ export default function NewArrivals() {
         lg:grid-cols-3 xl:grid-cols-4 gap-[30px] max-w-sm mx-auto
         md:max-w-none md:mx-0"
         >
-          <div className="grid-item1 border-2 border-[#e4e4e4] h-full">
+          <div className="relative grid-item1 border-2 border-[#e4e4e4] h-full">
             <img src={midwomen1} alt="" />
+            <button className="absolute bottom-20 left-24 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+              <Link to={`/Women`}>Shop Women</Link>
+            </button>
           </div>
-          <div className="grid-item2 border-2 border-[#e4e4e4] h-full">
+          <div className="relative grid-item2 border-2 border-[#e4e4e4] h-full">
             <img src={midwomen2} alt="" />
+            <button className="absolute bottom-20 left-24 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+              <Link to={`/Women`}>Shop Women</Link>
+            </button>
           </div>
-          <div className="grid-item3 border-2 border-[#e4e4e4] h-full">
+          <div className="relative grid-item3 border-2 border-[#e4e4e4] h-full">
             <img src={midwomen3} alt="" />
+            <button className="absolute bottom-20 left-24 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+              <Link to={`/Women`}>Shop Women</Link>
+            </button>
           </div>
-          <div className="grid-item4 border-2 border-[#e4e4e4] h-full">
+          <div className="relative grid-item4 border-2 border-[#e4e4e4] h-full">
             <img src={midwomen4} alt="" />
+            <button className="absolute bottom-20 left-24 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+              <Link to={`/Women`}>Shop Women</Link>
+            </button>
           </div>
         </div>
       </div>

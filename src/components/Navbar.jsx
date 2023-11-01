@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux";
 import SearchBar from "./SearchBar";
 import Search from "./Search";
 import Login from "../pages/Login";
+import Wishlist from "./Wishlist";
 
 export default function Navbar() {
   //headerstate
@@ -49,7 +50,7 @@ export default function Navbar() {
   const menuItems = [
     {
       title: "Featured",
-      link: "/",
+      link: "/Featured",
     },
     {
       title: "Men",
@@ -144,6 +145,7 @@ export default function Navbar() {
         </div>
       </div>
       {modalOpen && <Login closeLoginModal={toggleModal} />}
+      {wishlistOpen && <Wishlist />}
     </div>
   );
 };

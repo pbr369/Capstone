@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsPlus, BsEyeFill } from "react-icons/bs";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { CartContext } from "../contexts/CartContext";
+import { AddWishList } from "../contexts/AddWishList";
 import Star from "../components/Star";
 import SearchBar from "../components/SearchBar";
 //search
@@ -10,6 +12,18 @@ import Search from "./Search";
 
 export default function Product({ product }) {
   const { addToCart } = useContext(CartContext);
+  const { addToWish } = useContext(AddWishList);
+
+  //add to wishlist
+   const [isLiked, setIsLiked] = useState(false);
+
+   const toggleLike = () => {
+     setIsLiked(!isLiked);
+
+     // Toggle the like status and add/remove the product to/from the wishlist
+     addToWish(product, id);
+   };
+
   //
   const { id, image, category, title, price, rating } = product;
   //search function
@@ -21,17 +35,31 @@ export default function Product({ product }) {
       relative overflow-hidden group transition"
       >
         <div className="w-full h-full flex justify-center items-center">
-          {/* image */}
-          <div
-            className="w-[200px] mx-auto flex justify-center 
+          <div className="relative">
+            <button onClick={toggleLike}>
+              <div
+                className="flex justify-center items-center text-black 
+          w-12 h-12 absolute -top-16 -left-6"
+              >
+                {isLiked ? (
+                  <FaHeart className="text-md text-red-500" />
+                ) : (
+                  <FaRegHeart className="text-md" />
+                )}
+              </div>
+            </button>
+            {/* image */}
+            <div
+              className="w-[200px] mx-auto flex justify-center 
           items-center"
-          >
-            <img
-              className="max-h-[160px] group-hover:scale-110
+            >
+              <img
+                className="max-h-[160px] group-hover:scale-110
             transition duration-300"
-              src={image}
-              alt=""
-            />
+                src={image}
+                alt=""
+              />
+            </div>
           </div>
         </div>
         {/* buttons */}

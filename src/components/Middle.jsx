@@ -122,27 +122,35 @@ export default function NewArrivals() {
         >
           <div className="relative grid-item1 border-2 border-[#e4e4e4] h-auto">
             <img src={midmen1} alt="" />
-            <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
-              <Link to={`/Men`}>Shop Men</Link>
-            </button>
+            <Link to={`/Men`}>
+              <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+                Shop Men
+              </button>
+            </Link>
           </div>
           <div className="relative grid-item2 border-2 border-[#e4e4e4] h-auto">
             <img src={midmen2} alt="" />
-            <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
-              <Link to={`/Men`}>Shop Men</Link>
-            </button>
+            <Link to={`/Men`}>
+              <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+                Shop Men
+              </button>
+            </Link>
           </div>
           <div className="relative grid-item3 border-2 border-[#e4e4e4] h-auto">
             <img src={midmen3} alt="" />
-            <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
-              <Link to={`/Men`}>Shop Men</Link>
-            </button>
+            <Link to={`/Men`}>
+              <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+                Shop Men
+              </button>
+            </Link>
           </div>
           <div className="relative grid-item4 border-2 border-[#e4e4e4] h-auto">
             <img src={midmen4} alt="" />
-            <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
-              <Link to={`/Men`}>Shop Men</Link>
-            </button>
+            <Link to={`/Men`}>
+              <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+                Shop Men
+              </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -159,27 +167,35 @@ export default function NewArrivals() {
         >
           <div className="relative grid-item1 border-2 border-[#e4e4e4] h-full">
             <img src={midwomen1} alt="" />
-            <button className="absolute bottom-20 left-24 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
-              <Link to={`/Women`}>Shop Women</Link>
-            </button>
+            <Link to={`/Women`}>
+              <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+                Shop Women
+              </button>
+            </Link>
           </div>
           <div className="relative grid-item2 border-2 border-[#e4e4e4] h-full">
             <img src={midwomen2} alt="" />
-            <button className="absolute bottom-20 left-24 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
-              <Link to={`/Women`}>Shop Women</Link>
-            </button>
+            <Link to={`/Women`}>
+              <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+                Shop Women
+              </button>
+            </Link>
           </div>
           <div className="relative grid-item3 border-2 border-[#e4e4e4] h-full">
             <img src={midwomen3} alt="" />
-            <button className="absolute bottom-20 left-24 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
-              <Link to={`/Women`}>Shop Women</Link>
-            </button>
+            <Link to={`/Women`}>
+              <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+                Shop Women
+              </button>
+            </Link>
           </div>
           <div className="relative grid-item4 border-2 border-[#e4e4e4] h-full">
             <img src={midwomen4} alt="" />
-            <button className="absolute bottom-20 left-24 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
-              <Link to={`/Women`}>Shop Women</Link>
-            </button>
+            <Link to={`/Women`}>
+              <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+                Shop Women
+              </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 //pages
 import Home from "./pages/Home";
 import ProductDetails from "./pages/ProductDetails";
+import Featured from "./pages/Featured";
 import Men from "./pages/Men";
 import Women from "./pages/Women"
 import Jewelry from "./pages/Jewelry";
@@ -17,11 +18,12 @@ import Register from "./pages/Register";
 
 export default function App() {
   return (
- <div>
+    <div>
       <Router>
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/Featured" element={<Featured />} />
           <Route path="/Men" element={<Men />} />
           <Route path="/Women" element={<Women />} />
           <Route path="/Jewelry" element={<Jewelry />} />

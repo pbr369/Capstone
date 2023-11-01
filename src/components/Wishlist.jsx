@@ -5,22 +5,23 @@ import { Link } from "react-router-dom";
 import { IoMdArrowForward } from "react-icons/io";
 import { FiTrash2 } from "react-icons/fi";
 //components
-import CartItem from "./CartItem";
+import WishItem from "./WishItem";
 //sidebar context
 import { SidebarContext } from "../contexts/SidebarContext";
+import { WishListContext } from "../contexts/WishListContext";
 //cart context
-import { CartContext } from "../contexts/CartContext";
+import { AddWishList } from "../contexts/AddWishList";
 import Dialog from "../components/Dialog";
 
-export default function Sidebar() {
-  const { isOpen, handleClose } = useContext(SidebarContext);
-  const { cart, clearCart, total, itemAmount, handleDelete } =
-    useContext(CartContext);
+export default function Wishlist() {
+  const { wishlistOpen, handleClose } = useContext(WishListContext);
+  const { wish, clearWish, total, itemAmount, handleDelete } =
+    useContext(AddWishList);
 
   return (
     <div>
       <div
-        className={`${isOpen ? "right-0" : "-right-full"}
+        className={`${wishlistOpen ? "right-0" : "-right-full"}
   w-full bg-white fixed top-0 h-full shadow-2xl
   md:w-[35vw] xl:max-w-[30vw] transition-all duration-300
   z-20 px-4 lg:px-[35px]`}
@@ -30,7 +31,7 @@ export default function Sidebar() {
             className="uppercase text-sm
     font-semibold"
           >
-            Shopping Bag ({itemAmount})
+            WishList
           </div>
           {/* icons */}
           <div
@@ -45,8 +46,8 @@ export default function Sidebar() {
           className="flex flex-col gap-y-2 h-[520px] lg:h-[640px]
     overflow-y-auto overflow-x-hidden border-b"
         >
-          {cart.map((item) => {
-            return <CartItem item={item} key={item.id} />;
+          {wish.map((item) => {
+            return <WishItem item={item} key={item.id} />;
           })}
         </div>
         <div
@@ -54,14 +55,9 @@ export default function Sidebar() {
     mt-4"
         >
           <div
-            className="flex w-full justify-between
+            className="flex w-full justify-end
       items-center"
           >
-            {/* total */}
-            <div className="uppercase font-semibold">
-              <span className="mr-2">Total:</span>${" "}
-              {parseFloat(total).toFixed(2)}
-            </div>
             {/* clear cart */}
             <div
               // onClick={clearCart}
@@ -73,13 +69,6 @@ export default function Sidebar() {
               <FiTrash2 />
             </div>
           </div>
-          <Link
-            to="/"
-            className="bg-gray-200 flex p-4 justify-center items-center
-      text-primary w-full font-medium"
-          >
-            View Cart
-          </Link>
           <Link
             to="/"
             className="bg-primary flex p-4 justify-center items-center

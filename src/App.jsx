@@ -14,6 +14,7 @@ import Header from "./components/Navbar";
 import Footer from "./components/Footer";
 import Search from "./components/Search";
 import Register from "./pages/Register";
+import Stripe from "./pages/Stripe";
 
 
 export default function App() {
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/Men" element={<Men />} />
           <Route path="/Women" element={<Women />} />
           <Route path="/Jewelry" element={<Jewelry />} />
+          <Route path="/Stripe" element={<Stripe />} />
           {/* <Route path="/Login" element={<Login />} /> */}
           <Route path="/Register" element={<Register />} />
           <Route path="product/:id" element={<ProductDetails />} />

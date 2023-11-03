@@ -1,95 +1,189 @@
-// server.js
-//
-// Use this sample code to handle webhook events in your integration.
-//
-// 1) Paste this code into a new file (server.js)
-//
-// 2) Install dependencies
-//   npm install stripe
-//   npm install express
-//
-// 3) Run the server on http://localhost:4242
-//   node server.js
-
-// The library needs to be configured with your account's secret key.
-// Ensure the key is kept out of any version control system you might be using.
-const stripe = require("stripe")("sk_test_...");
 const express = require("express");
-const app = express();
+const Stripe = require("stripe");
+const { Order } = require("../models/Order");
 
-// This is your Stripe CLI webhook secret for testing your endpoint locally.
-const endpointSecret =
-  "whsec_40c7c8fa5f94d7be3348e09a3f11a2089d441f3787c325ca573af5f8ed191de5";
+require("dotenv").config();
 
-app.post(
+const stripe = Stripe(process.env.STRIPE_KEY);
+
+const router = express.Router();
+
+router.post("/create-checkout-session", async (req, res) => {
+  const customer = await stripe.customers.create({
+    metadata: {
+      userId: req.body.userId,
+      cart: JSON.stringify(req.body.cartItems),
+    },
+  });
+
+  const line_items = req.body.cartItems.map((item) => {
+    return {
+      price_data: {
+        currency: "usd",
+        product_data: {
+          name: item.name,
+          images: [item.image],
+          description: item.desc,
+          metadata: {
+            id: item.id,
+          },
+        },
+        unit_amount: item.price * 100,
+      },
+      quantity: item.cartQuantity,
+    };
+  });
+
+  const session = await stripe.checkout.sessions.create({
+    payment_method_types: ["card"],
+    shipping_address_collection: {
+      allowed_countries: ["US", "CA", "KE"],
+    },
+    shipping_options: [
+      {
+        shipping_rate_data: {
+          type: "fixed_amount",
+          fixed_amount: {
+            amount: 0,
+            currency: "usd",
+          },
+          display_name: "Free shipping",
+          // Delivers between 5-7 business days
+          delivery_estimate: {
+            minimum: {
+              unit: "business_day",
+              value: 5,
+            },
+            maximum: {
+              unit: "business_day",
+              value: 7,
+            },
+          },
+        },
+      },
+      {
+        shipping_rate_data: {
+          type: "fixed_amount",
+          fixed_amount: {
+            amount: 1500,
+            currency: "usd",
+          },
+          display_name: "Next day air",
+          // Delivers in exactly 1 business day
+          delivery_estimate: {
+            minimum: {
+              unit: "business_day",
+              value: 1,
+            },
+            maximum: {
+              unit: "business_day",
+              value: 1,
+            },
+          },
+        },
+      },
+    ],
+    phone_number_collection: {
+      enabled: true,
+    },
+    line_items,
+    mode: "payment",
+    customer: customer.id,
+    success_url: `${process.env.CLIENT_URL}/checkout-success`,
+    cancel_url: `${process.env.CLIENT_URL}/cart`,
+  });
+
+  // res.redirect(303, session.url);
+  res.send({ url: session.url });
+});
+
+// Create order function
+
+const createOrder = async (customer, data) => {
+  const Items = JSON.parse(customer.metadata.cart);
+
+  const products = Items.map((item) => {
+    return {
+      productId: item.id,
+      quantity: item.cartQuantity,
+    };
+  });
+
+  const newOrder = new Order({
+    userId: customer.metadata.userId,
+    customerId: data.customer,
+    paymentIntentId: data.payment_intent,
+    products,
+    subtotal: data.amount_subtotal,
+    total: data.amount_total,
+    shipping: data.customer_details,
+    payment_status: data.payment_status,
+  });
+
+  try {
+    const savedOrder = await newOrder.save();
+    console.log("Processed Order:", savedOrder);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+// Stripe webhoook
+
+router.post(
   "/webhook",
-  express.raw({ type: "application/json" }),
-  (request, response) => {
-    const sig = request.headers["stripe-signature"];
+  express.json({ type: "application/json" }),
+  async (req, res) => {
+    let data;
+    let eventType;
 
-    let event;
+    // Check if webhook signing is configured.
+    let webhookSecret;
+    //webhookSecret = process.env.STRIPE_WEB_HOOK;
 
-    try {
-      event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
-    } catch (err) {
-      response.status(400).send(`Webhook Error: ${err.message}`);
-      return;
+    if (webhookSecret) {
+      // Retrieve the event by verifying the signature using the raw body and secret.
+      let event;
+      let signature = req.headers["stripe-signature"];
+
+      try {
+        event = stripe.webhooks.constructEvent(
+          req.body,
+          signature,
+          webhookSecret
+        );
+      } catch (err) {
+        console.log(`⚠️  Webhook signature verification failed:  ${err}`);
+        return res.sendStatus(400);
+      }
+      // Extract the object from the event.
+      data = event.data.object;
+      eventType = event.type;
+    } else {
+      // Webhook signing is recommended, but if the secret is not configured in `config.js`,
+      // retrieve the event data directly from the request body.
+      data = req.body.data.object;
+      eventType = req.body.type;
     }
 
-    // Handle the event
-    switch (event.type) {
-      case "checkout.session.async_payment_failed":
-        const checkoutSessionAsyncPaymentFailed = event.data.object;
-        // Then define and call a function to handle the event checkout.session.async_payment_failed
-        break;
-      case "checkout.session.async_payment_succeeded":
-        const checkoutSessionAsyncPaymentSucceeded = event.data.object;
-        // Then define and call a function to handle the event checkout.session.async_payment_succeeded
-        break;
-      case "checkout.session.completed":
-        const checkoutSessionCompleted = event.data.object;
-        // Then define and call a function to handle the event checkout.session.completed
-        break;
-      case "checkout.session.expired":
-        const checkoutSessionExpired = event.data.object;
-        // Then define and call a function to handle the event checkout.session.expired
-        break;
-      case "payment_method.attached":
-        const paymentMethodAttached = event.data.object;
-        // Then define and call a function to handle the event payment_method.attached
-        break;
-      case "payment_method.automatically_updated":
-        const paymentMethodAutomaticallyUpdated = event.data.object;
-        // Then define and call a function to handle the event payment_method.automatically_updated
-        break;
-      case "payment_method.detached":
-        const paymentMethodDetached = event.data.object;
-        // Then define and call a function to handle the event payment_method.detached
-        break;
-      case "payment_method.updated":
-        const paymentMethodUpdated = event.data.object;
-        // Then define and call a function to handle the event payment_method.updated
-        break;
-      case "product.created":
-        const productCreated = event.data.object;
-        // Then define and call a function to handle the event product.created
-        break;
-      case "product.deleted":
-        const productDeleted = event.data.object;
-        // Then define and call a function to handle the event product.deleted
-        break;
-      case "product.updated":
-        const productUpdated = event.data.object;
-        // Then define and call a function to handle the event product.updated
-        break;
-      // ... handle other event types
-      default:
-        console.log(`Unhandled event type ${event.type}`);
+    // Handle the checkout.session.completed event
+    if (eventType === "checkout.session.completed") {
+      stripe.customers
+        .retrieve(data.customer)
+        .then(async (customer) => {
+          try {
+            // CREATE ORDER
+            createOrder(customer, data);
+          } catch (err) {
+            console.log(typeof createOrder);
+            console.log(err);
+          }
+        })
+        .catch((err) => console.log(err.message));
     }
 
-    // Return a 200 response to acknowledge receipt of the event
-    response.send();
+    res.status(200).end();
   }
 );
 
-app.listen(4242, () => console.log("Running on port 4242"));
+export default Stripe;

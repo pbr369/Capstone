@@ -8,7 +8,7 @@ export default function CartItem({ item }) {
   const { removeFromCart, increaseAmount, decreaseAmount } =
     useContext(CartContext);
 
-  const { id, title, image, price, amount } = item;
+  const { id, title, image, price, amount, description, total } = item;
 
   return (
     <div

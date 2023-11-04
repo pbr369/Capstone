@@ -7,9 +7,9 @@ import SidebarProvider from "./contexts/SidebarContext";
 import WishListProvider from "./contexts/WishListContext";
 import AddWishProvider from "./contexts/AddWishList";
 import CartProvider from "./contexts/CartContext";
-import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
   <SidebarProvider>
     <WishListProvider>
@@ -17,7 +17,7 @@ root.render(
         <ProductProvider>
           <AddWishProvider>
             <React.StrictMode>
-              <App />
+                <App />
             </React.StrictMode>
           </AddWishProvider>
         </ProductProvider>

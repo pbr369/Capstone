@@ -1,43 +1,56 @@
-const express = require("express");
-const Stripe = require("stripe");
-const { Order } = require("../models/Order");
+import express from "express";
+import Stripe from "stripe";
+import dotenv from "dotenv";
+import cors from "cors"; // Import the cors middleware
 
-require("dotenv").config();
+dotenv.config();
 
 const stripe = Stripe(process.env.STRIPE_KEY);
 
-const router = express.Router();
+const app = express();
+const corsOptions = {
+  origin: "http://localhost:5173", // Replace with the actual URL of your frontend application
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
 
-router.post("/create-checkout-session", async (req, res) => {
+app.use(cors(corsOptions));// Use the cors middleware to enable CORS for all routes
+
+const router = express.Router();
+app.use(express.json());
+
+router.post("/stripe/create-checkout-session", async (req, res) => {
   const customer = await stripe.customers.create({
     metadata: {
-      userId: req.body.userId,
-      cart: JSON.stringify(req.body.cartItems),
+      cart: JSON.stringify(req.body.cartItems.toString()),
     },
   });
+
+  console.log(req.body);
+  //const { id, image, category, title, price, rating } = product;
 
   const line_items = req.body.cartItems.map((item) => {
     return {
       price_data: {
         currency: "usd",
         product_data: {
-          name: item.name,
-          images: [item.image],
-          description: item.desc,
+          name: item.title,
+          images: [item.image], // Wrap the image in an array if it's a single string
           metadata: {
             id: item.id,
           },
         },
-        unit_amount: item.price * 100,
+        unit_amount: Math.round(item.price * 100), // Convert price to cents
       },
-      quantity: item.cartQuantity,
+      quantity: item.amount,
     };
   });
 
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     shipping_address_collection: {
-      allowed_countries: ["US", "CA", "KE"],
+      allowed_countries: ["US", "CA", "PH"],
     },
     shipping_options: [
       {
@@ -90,7 +103,7 @@ router.post("/create-checkout-session", async (req, res) => {
     mode: "payment",
     customer: customer.id,
     success_url: `${process.env.CLIENT_URL}/checkout-success`,
-    cancel_url: `${process.env.CLIENT_URL}/cart`,
+    cancel_url: `${process.env.CLIENT_URL}/Sidebar`,
   });
 
   // res.redirect(303, session.url);
@@ -186,4 +199,8 @@ router.post(
   }
 );
 
-export default Stripe;
+app.use("/", router);
+
+const PORT = process.env.PORT || 4242;
+
+app.listen(PORT, () => console.log(`Listening on port ${PORT}!`));

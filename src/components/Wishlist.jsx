@@ -74,7 +74,7 @@ export default function Wishlist() {
             className="bg-primary flex p-4 justify-center items-center
       text-white w-full font-medium"
           >
-            Checkout
+            Add to Cart
           </Link>
         </div>
       </div>

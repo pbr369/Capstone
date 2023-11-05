@@ -22,7 +22,7 @@ export default function HeroJewelry() {
       mb-4 text-white"
             >
               Clothify <br />
-              <span className="font-semibold">Jewelery</span>
+              <span className="font-semibold">Jewelry</span>
             </h1>
             <Link
               to={"/"}

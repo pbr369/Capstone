@@ -116,6 +116,7 @@ export default function Navbar() {
               onClick={() => setWishlistOpen(!wishlistOpen)}
             >
               <FaRegHeart className="text-2xl text-white" />
+             
             </div>
             {/* bag */}
             <div className="px-2" onClick={() => setIsOpen(!isOpen)}>

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { ProductContext } from "../contexts/ProductContext";
 import Product from "../components/Product";
-import Hero from "../components/HeroJewelery";
+import Hero from "../components/FeaturedHero";
 
 export default function Featured() {
   const { products } = useContext(ProductContext);

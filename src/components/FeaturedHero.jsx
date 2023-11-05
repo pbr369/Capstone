@@ -22,7 +22,7 @@ export default function HeroMen() {
       mb-4"
             >
               Clothify <br />
-              <span className="font-semibold text-white">Men</span>
+              <span className="font-semibold text-white">Featured</span>
             </h1>
             <Link
               to={"/"}

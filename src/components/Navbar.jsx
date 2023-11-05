@@ -97,9 +97,9 @@ export default function Navbar() {
           {/* justify end search and cart */}
 
           {/* search bar */}
-          <div className="hidden lg:flex">
+          {/* <div className="hidden lg:flex">
             <SearchBar onSearch={onSearch} />
-          </div>
+          </div> */}
           {/* cart */}
 
           {/* reg */}

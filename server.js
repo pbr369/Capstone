@@ -27,7 +27,7 @@ router.post("/stripe/create-checkout-session", async (req, res) => {
     },
   });
 
-  console.log(req.body);
+  //console.log(req.body);
   //const { id, image, category, title, price, rating } = product;
 
   const line_items = req.body.cartItems.map((item) => {
@@ -102,8 +102,8 @@ router.post("/stripe/create-checkout-session", async (req, res) => {
     line_items,
     mode: "payment",
     customer: customer.id,
-    success_url: `${process.env.CLIENT_URL}/checkout-success`,
-    cancel_url: `${process.env.CLIENT_URL}/Sidebar`,
+    success_url: `${process.env.CLIENT_URL}/Checkoutsuccess`,
+    cancel_url: `${process.env.CLIENT_URL}/Featured`,
   });
 
   // res.redirect(303, session.url);

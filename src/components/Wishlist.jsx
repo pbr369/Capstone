@@ -69,13 +69,13 @@ export default function Wishlist() {
               <FiTrash2 />
             </div>
           </div>
-          <Link
+          {/* <Link
             to="/"
             className="bg-primary flex p-4 justify-center items-center
       text-white w-full font-medium"
           >
             Add to Cart
-          </Link>
+          </Link> */}
         </div>
       </div>
     </div>

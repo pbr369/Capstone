@@ -14,6 +14,7 @@ import Header from "./components/Navbar";
 import Footer from "./components/Footer";
 import Search from "./components/Search";
 import Register from "./pages/Register";
+import Checkout from "./pages/Checkoutsuccess";
 
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
           <Route path="/Women" element={<Women />} />
           <Route path="/Jewelry" element={<Jewelry />} />
           {/* <Route path="/Login" element={<Login />} /> */}
+          <Route path="/Checkoutsuccess" element={<Checkout />} />
           <Route path="/Register" element={<Register />} />
           <Route path="product/:id" element={<ProductDetails />} />
           <Route path="/Search" element={<Search />} />

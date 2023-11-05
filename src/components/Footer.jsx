@@ -3,6 +3,7 @@ import Logo from "../img/blacklogo.svg";
 import Xtwitter from "../img/x.svg";
 import facebook from "../img/facebook.svg";
 import instagram from "../img/instagram.svg";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -61,24 +62,24 @@ export default function Footer() {
             </p>
 
             <div className="flex flex-col items-start mt-5 space-y-2">
-              <a
-                href="/"
+              <Link
+                to="/Men"
                 className="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
                 Men
-              </a>
-              <a
-                href="/"
+              </Link>
+              <Link
+                to="/Women"
                 className="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
                 Women
-              </a>
-              <a
-                href="/"
+              </Link>
+              <Link
+                to="/Jewelry"
                 className="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
                 Jewelry
-              </a>
+              </Link>
             </div>
           </div>
         </div>

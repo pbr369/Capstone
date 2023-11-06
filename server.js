@@ -174,7 +174,7 @@ router.post(
 
     // Check if webhook signing is configured.
     let webhookSecret;
-    //webhookSecret = process.env.STRIPE_WEB_HOOK;
+    webhookSecret = process.env.STRIPE_WEB_HOOK;
 
     if (webhookSecret) {
       // Retrieve the event by verifying the signature using the raw body and secret.

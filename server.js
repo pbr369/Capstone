@@ -9,7 +9,7 @@ const stripe = Stripe(process.env.STRIPE_KEY);
 
 const app = express();
 const corsOptions = {
-  origin: "http://localhost:5173", // Replace with the actual URL of your frontend application
+  origin: "https://mp-2-lake.vercel.app", // Replace with the actual URL of your frontend application
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   optionsSuccessStatus: 204,

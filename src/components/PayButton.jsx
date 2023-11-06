@@ -11,7 +11,7 @@ const PayButton = ({ cartItems }) => {
   const handleCheckout = () => {
     console.log("Cart data:", cart); //debug
     axios
-      .post(`http://localhost:4242/stripe/create-checkout-session`, {
+      .post(`https://mp-2-lake.vercel.app/stripe/create-checkout-session`, {
         cartItems: cart,
       })
       .then((response) => {

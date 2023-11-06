@@ -18,6 +18,7 @@ import SearchBar from "./SearchBar";
 import Search from "./Search";
 import Login from "../pages/Login";
 import Wishlist from "./Wishlist";
+import HamburgerMenu from "./HamburgerMenu";
 
 export default function Navbar() {
   //headerstate
@@ -25,6 +26,7 @@ export default function Navbar() {
   const { isOpen, setIsOpen } = useContext(SidebarContext);
   const { wishlistOpen, setWishlistOpen } = useContext(WishListContext);
   const { itemAmount } = useContext(CartContext);
+  
   //event listener
 
   //search
@@ -46,6 +48,10 @@ export default function Navbar() {
     setModalOpen(!modalOpen);
   };
 
+  const [hamburgerOpen, setHamburgerOpen] = useState(false);
+const hamtoggleModal = () => {
+  setHamburgerOpen(!hamburgerOpen);
+};
   //bagong add
   const menuItems = [
     {
@@ -65,6 +71,23 @@ export default function Navbar() {
       link: "/Jewelry",
     },
   ];
+
+  // to change burger classes
+  const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
+  const [menu_class, setMenuClass] = useState("menu hidden");
+  const [isMenuClicked, setIsMenuClicked] = useState(false);
+
+  // toggle burger menu change
+  const updateMenu = () => {
+    if (!isMenuClicked) {
+      setBurgerClass("burger-bar clicked");
+      setMenuClass("menu visible");
+    } else {
+      setBurgerClass("burger-bar unclicked");
+      setMenuClass("menu hidden");
+    }
+    setIsMenuClicked(!isMenuClicked);
+  };
 
   return (
     <div>
@@ -116,7 +139,6 @@ export default function Navbar() {
               onClick={() => setWishlistOpen(!wishlistOpen)}
             >
               <FaRegHeart className="text-2xl text-white" />
-             
             </div>
             {/* bag */}
             <div className="px-2" onClick={() => setIsOpen(!isOpen)}>
@@ -129,7 +151,11 @@ export default function Navbar() {
                 {itemAmount}
               </div>
             </div>
-            <div className="lg:hidden absolute -top-[2px] -right-8">
+            {/* hamburger */}
+            <div
+              className="lg:hidden absolute -top-[2px] -right-8"
+              onClick={() => setHamburgerOpen(!hamburgerOpen)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 x="0px"
@@ -147,6 +173,7 @@ export default function Navbar() {
       </div>
       {modalOpen && <Login closeLoginModal={toggleModal} />}
       {wishlistOpen && <Wishlist />}
+      {hamburgerOpen && <HamburgerMenu closeHamburger={hamtoggleModal} />}
     </div>
   );
 };

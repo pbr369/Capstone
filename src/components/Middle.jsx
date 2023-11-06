@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import imgdisc from "../img/25disc.png";
 import { Link } from "react-router-dom";
 //import images
-import midmen1 from "../img/mid-men1.png"
+import midmen1 from "../img/mid-men1.png";
 import midmen2 from "../img/mid-men2.png";
 import midmen3 from "../img/mid-men3.png";
 import midmen4 from "../img/mid-men4.png";
@@ -28,15 +28,17 @@ export default function NewArrivals() {
             <div className="text-5xl text-white font-bold">MEMBER</div>
             <div className="text-5xl text-white font-bold">EXCLUSIVE</div>
             <div className="text-sm font-light text-gray-200 grid grid-cols-1 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-3">
-              <div className="grid-item1 mb-3">
+              <div className="grid-item1 mb-3 xs:grid-cols-1">
                 We’re making it easy for Clothify Rewards members to get a head
                 start on holiday shopping. Must be logged in for discount to
                 apply at checkout.
               </div>
             </div>
-            <button className="bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
-              <Link to={`/Register`}>Register Now</Link>
-            </button>
+            <Link to={`/Register`}>
+              <button className="bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
+                Register Now
+              </button>
+            </Link>
           </div>
         </div>
       </div>

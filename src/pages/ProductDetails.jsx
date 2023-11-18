@@ -24,7 +24,7 @@ if (!product){
 }
 
 //destructure product
-const {title, price, description, image, rating} = product;
+const {product_name, price, description, image_url_1, rate, reviews_num} = product;
   return (
     <section className="pt-32 pb-12 lg:py-32 h-screen flex items-center">
       <div className="container mx-auto">
@@ -32,7 +32,11 @@ const {title, price, description, image, rating} = product;
         <div className="flex flex-col lg:flex-row items-center">
           {/* image */}
           <div className="flex flex-1 justify-center items-center mb-8 lg:mb-0">
-            <img className="max-w-[200px] lg:max-w-sm" src={image} alt="" />
+            <img
+              className="max-w-[200px] lg:max-w-sm"
+              src={image_url_1}
+              alt=""
+            />
           </div>
           {/* text */}
           <div className="flex-1 text-center lg:text-left">
@@ -40,12 +44,12 @@ const {title, price, description, image, rating} = product;
               className="text-[26px] font-medium mb-2 
             max-w-[450px] mx-auto lg:mx-0"
             >
-              {title}
+              {product_name}
             </h1>
             <div className="text-xl text-red-500 font-medium mb-6">
               $ {price}
             </div>
-            <Star stars={rating.rate} reviews={rating.count}></Star>
+            <Star stars={rate} reviews={reviews_num}></Star>
             <p className="mb-8">{description}</p>
             <button
               onClick={() => addToCart(product, product.id)}

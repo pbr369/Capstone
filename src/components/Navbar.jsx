@@ -26,6 +26,7 @@ export default function Navbar() {
   const { isOpen, setIsOpen } = useContext(SidebarContext);
   const { wishlistOpen, setWishlistOpen } = useContext(WishListContext);
   const { itemAmount } = useContext(CartContext);
+  const [searchResults, setSearchResults] = useState([]);
   
   //event listener
 
@@ -35,7 +36,9 @@ export default function Navbar() {
   });
 
   const onSearch = async (text) => {
+    const results = setSearchResults(text);
     setState((prevState) => {
+      setSearchResults(results);
       return { ...prevState, results: results };
     });
   };
@@ -55,10 +58,6 @@ const hamtoggleModal = () => {
   //bagong add
   const menuItems = [
     {
-      title: "Featured",
-      link: "/Featured",
-    },
-    {
       title: "Men",
       link: "/Men",
     },
@@ -67,8 +66,24 @@ const hamtoggleModal = () => {
       link: "/Women",
     },
     {
-      title: "Jewelry",
-      link: "/Jewelry",
+      title: "Kids",
+      link: "/Kids",
+    },
+    {
+      title: "Luxury",
+      link: "/Luxury",
+    },
+    {
+      title: "Sports",
+      link: "/Sports",
+    },
+    {
+      title: "Shoes",
+      link: "/Shoes",
+    },
+    {
+      title: "Bag",
+      link: "/Bag",
     },
   ];
 
@@ -110,7 +125,7 @@ const hamtoggleModal = () => {
           </Link>
           {/* add menus */}
 
-          <div className="nav-mid flex gap-7 text-white text-lg hidden lg:flex px-4 mx-auto font-semibold font-heading space-x-12">
+          <div className="nav-mid flex gap-4 text-white text-lg hidden lg:flex px-4 mx-auto font-semibold font-heading space-x-6">
             {menuItems.map((item, idx) => (
               <Link key={idx} to={item.link}>
                 {item.title}
@@ -120,9 +135,9 @@ const hamtoggleModal = () => {
           {/* justify end search and cart */}
 
           {/* search bar */}
-          {/* <div className="hidden lg:flex">
+           <div className="hidden lg:flex">
             <SearchBar onSearch={onSearch} />
-          </div> */}
+          </div>
           {/* cart */}
 
           {/* reg */}

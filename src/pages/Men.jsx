@@ -8,7 +8,7 @@ export default function Men () {
 
   const filteredProducts = products.filter((item) => {
     return (
-      item.category === "men's clothing"
+      item.category === "Men"
     );
   });
 

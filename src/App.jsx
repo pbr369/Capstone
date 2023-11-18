@@ -28,6 +28,7 @@ export default function App() {
           <Route path="/Men" element={<Men />} />
           <Route path="/Women" element={<Women />} />
           <Route path="/Jewelry" element={<Jewelry />} />
+          <Route path="/search" element={<Search />} />
           {/* <Route path="/Login" element={<Login />} /> */}
           <Route path="/Checkoutsuccess" element={<Checkout />} />
           <Route path="/Register" element={<Register />} />

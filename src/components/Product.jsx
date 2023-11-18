@@ -25,9 +25,27 @@ export default function Product({ product }) {
    };
 
   //
-  const { id, image, category, title, price, rating } = product;
+  const { id, image_url_1, category, product_name, price, rate, brand, reviews_num } = product;
   //search function
   const [searchTerm, setSearchTerm] = useState("");
+
+  function formatPrice(price) {
+    // Convert the price to a string
+    const priceString = price.toString();
+
+    // Split the string into whole and decimal parts
+    const [wholePart, decimalPart] = priceString.split(".");
+
+    // Add commas to the whole part for thousands
+    const formattedWholePart = wholePart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    // Combine the whole and decimal parts, and add the PHP symbol
+    const formattedPrice = `₱${formattedWholePart}${
+      decimalPart ? `.${decimalPart}` : ""
+    }`;
+
+    return formattedPrice;
+  }
   return (
     <div>
       <div
@@ -56,7 +74,7 @@ export default function Product({ product }) {
               <img
                 className="max-h-[160px] group-hover:scale-110
             transition duration-300"
-                src={image}
+                src={image_url_1}
                 alt=""
               />
             </div>
@@ -89,12 +107,14 @@ export default function Product({ product }) {
       </div>
       {/* category, title and price */}
       <div>
-        <div className="text-sm capitalize text-gray-500">{category}</div>
+        <div className="text-sm capitalize text-gray-500">
+          {brand} / {category}
+        </div>
         <Link to={`/product/${id}`}>
-          <h2 className="font-semibold mb-1">{title}</h2>
+          <h2 className="font-semibold mb-1">{product_name}</h2>
         </Link>
-        <Star stars={rating.rate} reviews={rating.count}></Star>
-        <div className="font-semibold">${price}</div>
+        <Star stars={rate} reviews={reviews_num}></Star>
+        <div className="font-semibold">{formatPrice(price)}</div>
       </div>
     </div>
   );

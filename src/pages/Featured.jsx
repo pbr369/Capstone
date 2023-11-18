@@ -7,11 +7,7 @@ export default function Featured() {
   const { products } = useContext(ProductContext);
 
   const filteredProducts = products.filter((item) => {
-    return (
-      item.category === "men's clothing" ||
-      item.category === "women's clothing" ||
-      item.category === "jewelery"
-    );
+    return (item.category === "Men");
   });
 
   return (

@@ -8,6 +8,7 @@ import Featured from "./pages/Featured";
 import Men from "./pages/Men";
 import Women from "./pages/Women"
 import Jewelry from "./pages/Jewelry";
+import Shoes from "./pages/Shoes"
 //components
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Navbar";
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Featured" element={<Featured />} />
           <Route path="/Men" element={<Men />} />
+          <Route path="/Shoes" element={<Shoes />} />
           <Route path="/Women" element={<Women />} />
           <Route path="/Jewelry" element={<Jewelry />} />
           <Route path="/search" element={<Search />} />

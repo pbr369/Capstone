@@ -1,14 +1,14 @@
 import React, { useContext } from "react";
 import { ProductContext } from "../contexts/ProductContext";
 import Product from "../components/Product";
-import Hero from "../components/HeroWomen";
+import Hero from "../components/HeroMen";
 
-export default function Women() {
+export default function Men () {
   const { products } = useContext(ProductContext);
 
   const filteredProducts = products.filter((item) => {
     return (
-      item.category === "Women"
+      item.category === "Shoes"
     );
   });
 

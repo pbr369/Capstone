@@ -6,7 +6,7 @@ import { CartContext } from "../contexts/CartContext";
 import { Link } from "react-router-dom";
 //icons
 import { BsBag } from "react-icons/bs";
-import Logo from "../img/logo.svg";
+import Logo from "../img/logo.png";
 //import search icon
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaRegUser, FaRegHeart } from "react-icons/fa";
@@ -57,6 +57,10 @@ const hamtoggleModal = () => {
 };
   //bagong add
   const menuItems = [
+    {
+      title: "All Products",
+      link: "/Allproducts",
+    },
     {
       title: "Men",
       link: "/Men",
@@ -121,7 +125,7 @@ const hamtoggleModal = () => {
         <div className="container mx-auto flex justify-between items-center h-full py-2">
           {/* logo */}
           <Link to={"/"}>
-            <img className="w-[40px]" src={Logo} alt="" />
+            <img className="w-[90px]" src={Logo} alt="" />
           </Link>
           {/* add menus */}
 
@@ -135,9 +139,9 @@ const hamtoggleModal = () => {
           {/* justify end search and cart */}
 
           {/* search bar */}
-           <div className="hidden lg:flex">
+           {/* <div className="hidden lg:flex">
             <SearchBar onSearch={onSearch} />
-          </div>
+          </div> */}
           {/* cart */}
 
           {/* reg */}

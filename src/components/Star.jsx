@@ -21,7 +21,7 @@ export default function Star({ stars, reviews }) {
     <div className="icon-style">
       <div className="flex">{ratingStar}</div>
       <div>
-        <p>({reviews} Customer Reviews)</p>
+        <p>({reviews} sold)</p>
       </div>
     </div>
   );

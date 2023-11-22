@@ -1,54 +1,78 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { BiUser } from "react-icons/bi";
 import { AiOutlineUnlock } from "react-icons/ai";
 import { IoMdAdd, IoMdClose, IoMdRemove } from "react-icons/io";
 import Navbar from "../components/Navbar";
+import useAuth from "../hooks/useAuth";
+
+import axios from "../api/axios";
+const LOGIN_URL = "";
 
 export default function Login({ closeLoginModal }) {
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
-  const [loginErrors, setLoginErrors] = useState({});
-  // const [modalOpen, setModalOpen] = useState(false);
+  const { setAuth } = useAuth();
 
-  const validateLogin = () => {
-    let errors = {};
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
-    if (!loginEmail) {
-      errors.email = "Please enter your email";
-    } else {
-      errors.email = "";
-    }
+  const userRef = useRef();
+  const errRef = useRef();
 
-    if (!loginPassword) {
-      errors.password = "Please enter your password";
-    } else {
-      errors.password = "";
-    }
-
-    setLoginErrors(errors);
-
-    return Object.keys(errors).length === 0;
-  };
+  const [user, setUser] = useState("");
+  const [pwd, setPwd] = useState("");
+  const [errMsg, setErrMsg] = useState("");
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      validateLogin();
-    }, 100);
+    userRef.current.focus();
+  }, []);
 
-    return () => clearTimeout(timeout);
-  }, [loginEmail, loginPassword]);
+  useEffect(() => {
+    setErrMsg("");
+  }, [user, pwd]);
 
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    const isValid = validateLogin();
+  try {
+    const response = await axios.post(
+      LOGIN_URL,
+      JSON.stringify({ username: user, password: pwd }),
+      {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      }
+    );
 
-    if (isValid) {
-      // submit form
+    console.log(JSON.stringify(response.data));
+
+    // Check the status code
+    if (response.status === 200) {
+      const accessToken = response.data.accessToken;
+      const roles = response.data.roles;
+      setAuth({ user, pwd, roles, accessToken });
+      setUser("");
+      setPwd("");
+      navigate(from, { replace: true });
+    } else if (response.status === 401) {
+      setErrMsg("Unauthorized");
+      errRef.current.focus();
+    } else {
+      setErrMsg("Login Failed");
+      errRef.current.focus();
     }
+  } catch (err) {
+    if (!err?.response) {
+      setErrMsg("No Server Response");
+    } else if (err.response?.status === 400) {
+      setErrMsg("Missing Username or Password");
+    } else {
+      setErrMsg("Login Failed");
+    }
+    errRef.current.focus();
+  }
   };
-
+  
   const modalOpenFunction = () => {
     closeLoginModal(); // Close the modal
   };
@@ -70,7 +94,17 @@ export default function Login({ closeLoginModal }) {
           </div>
           <div className="flex w-auto justify-center items-center bg-white space-y-8">
             <div className="w-auto px-8 md:px-32 lg:px-24">
-              <form className="bg-white rounded-md shadow-2xl p-6">
+              <p
+                ref={errRef}
+                className={errMsg ? "errmsg" : "offscreen"}
+                aria-live="assertive"
+              >
+                {errMsg}
+              </p>
+              <form
+                className="bg-white rounded-md shadow-2xl p-6"
+                onSubmit={handleSubmit}
+              >
                 <h1 className="text-gray-800 font-bold text-2xl mb-1">Login</h1>
                 <p className="text-sm font-normal text-gray-600 mb-8"></p>
                 <div className="flex items-center border-2 mb-8 py-2 px-3 rounded-2xl">
@@ -89,11 +123,15 @@ export default function Login({ closeLoginModal }) {
                     />
                   </svg>
                   <input
-                    id="email"
+                    id="username"
                     className=" pl-2 w-full outline-none border-none"
-                    type="email"
-                    name="email"
-                    placeholder="Email Address"
+                    type="text"
+                    placeholder="Username"
+                    ref={userRef}
+                    autoComplete="off"
+                    onChange={(e) => setUser(e.target.value)}
+                    value={user}
+                    required
                   />
                 </div>
                 <div className="flex items-center border-2 mb-12 py-2 px-3 rounded-2xl ">
@@ -115,6 +153,9 @@ export default function Login({ closeLoginModal }) {
                     name="password"
                     id="password"
                     placeholder="Password"
+                    onChange={(e) => setPwd(e.target.value)}
+                    value={pwd}
+                    required
                   />
                 </div>
                 <button
@@ -128,10 +169,10 @@ export default function Login({ closeLoginModal }) {
                     Forgot Password
                   </span>
                   <Link
-                      to="/Register"
-                      onClick={modalOpenFunction}
-                      className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all"
-                    >
+                    to="/Register"
+                    onClick={modalOpenFunction}
+                    className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all"
+                  >
                     Register
                   </Link>
                 </div>

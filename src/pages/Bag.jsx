@@ -1,24 +1,22 @@
 import React, { useContext, useState } from "react";
 import { ProductContext } from "../contexts/ProductContext";
 import Product from "../components/Product";
-import Hero from "../components/HeroWomen";
-
+import Hero from "../components/HeroMen";
+//import search icon
 import { AiOutlineSearch } from "react-icons/ai";
 
-export default function Women() {
+export default function Bag() {
   const { products } = useContext(ProductContext);
 
   const filteredProducts = products.filter((item) => {
-    return (
-      item.category === "Women"
-    );
+    return item.category === "Bag";
   });
 
   const [searchTerm, setSearchTerm] = useState("");
 
-    const handleSearchClick = () => {
-      setSearchTerm(searchTerm);
-    };
+  const handleSearchClick = () => {
+    setSearchTerm(searchTerm);
+  };
 
   return (
     <div>
@@ -67,4 +65,4 @@ export default function Women() {
       </section>
     </div>
   );
-};
+}

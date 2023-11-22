@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../img/blacklogo.svg";
+import Logo from "../img/blacklogo.png";
 import Xtwitter from "../img/x.svg";
 import facebook from "../img/facebook.svg";
 import instagram from "../img/instagram.svg";
@@ -88,7 +88,7 @@ export default function Footer() {
 
         <div className="flex items-center justify-between">
           <a href="/">
-            <img className="w-auto h-7" src={Logo} alt="" />
+            <img className="w-[45px] h-[45px]" src={Logo} alt="" />
           </a>
 
           <div className="flex -mx-2">

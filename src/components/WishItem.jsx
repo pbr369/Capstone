@@ -8,7 +8,7 @@ export default function WishItem({ item }) {
   const { removeFromWish, increaseAmount, decreaseAmount } =
     useContext(AddWishList);
 
-  const { id, title, image, price, amount } = item;
+  const { id, product_name, image_url_1 } = item;
 
   return (
     <div
@@ -21,7 +21,7 @@ export default function WishItem({ item }) {
       >
         {/* image */}
         <Link to={`/product/${id}`}>
-          <img className="max-w-[80px]" src={image} alt="" />
+          <img className="max-w-[80px]" src={image_url_1} alt="" />
         </Link>
         <div className="w-full flex flex-col">
           {/* title and remove ico */}
@@ -32,7 +32,7 @@ export default function WishItem({ item }) {
               className="text-sm uppercase font-medium max-w-[240px] 
           text-primary hover:underline"
             >
-              {title}
+              {product_name}
             </Link>
             {/* remove icon */}
             <div

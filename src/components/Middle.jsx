@@ -1,17 +1,23 @@
-import React from "react";
-import imgdisc from "../img/25disc.png";
+import React, {useContext} from "react";
 import { Link } from "react-router-dom";
-//import images
-import midmen1 from "../img/mid-men1.png";
-import midmen2 from "../img/mid-men2.png";
-import midmen3 from "../img/mid-men3.png";
-import midmen4 from "../img/mid-men4.png";
+import { ProductContext } from "../contexts/ProductContext";
+import Product from "../components/Product";
+import imgdisc from "../img/25disc.png";
 import midwomen1 from "../img/mid-women1.png";
 import midwomen2 from "../img/mid-women2.png";
 import midwomen3 from "../img/mid-women3.png";
 import midwomen4 from "../img/mid-women4.png";
+import TopSoldProducts from "./TopSoldProducts";
+import TopRatedProducts from "./TopRatedProducts";
+import TopCheapProducts from "./TopCheapProducts";
 
 export default function NewArrivals() {
+    const { products } = useContext(ProductContext);
+
+    const filteredProducts = products.filter((item) => {
+      return item;
+    });
+
   return (
     <div>
       <div className="da relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50">
@@ -25,12 +31,16 @@ export default function NewArrivals() {
             />
           </div>
           <div className="absolute bottom-0 m-0 mx-5 pb-4 ps-4 transition duration-300 ease-in-out group-hover:-translate-y-1 group-hover:translate-x-12 group-hover:scale-110">
-            <div className="text-5xl text-white font-bold">MEMBER</div>
-            <div className="text-5xl text-white font-bold">EXCLUSIVE</div>
+            <div className="text-white font-bold mb-2 md:text-5xl">
+              MEMBER
+            </div>
+            <div className="text-white font-bold mb-2 md:text-5xl">
+              EXCLUSIVE
+            </div>
             <div className="text-sm font-light text-gray-200 grid grid-cols-1 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-3">
-              <div className="grid-item1 mb-3 xs:grid-cols-1">
+              <div className="text-sm font-light text-gray-200 mb-2 hidden sm:grid">
                 We’re making it easy for Clothify Rewards members to get a head
-                start on holiday shopping. Must be logged in for discount to
+                start on holiday shopping. Must be logged in for the discount to
                 apply at checkout.
               </div>
             </div>
@@ -45,91 +55,31 @@ export default function NewArrivals() {
       <div className="container mx-auto mb-10">
         <div>
           <h2 className="text-2xl font-extrabold text-gray-900 mb-5 mt-5">
-            Shop Men's Fashion
+            Top Sold Products
           </h2>
         </div>
-        <div
-          className="grid grid-cols-2 md:grid-cols-2
-        lg:grid-cols-3 xl:grid-cols-4 gap-[30px] max-w-sm mx-auto
-        md:max-w-none md:mx-0"
-        >
-          <div className="relative grid-item1 border-2 border-[#e4e4e4] h-auto">
-            <img src={midmen1} alt="" />
-            <Link to={`/Men`}>
-              <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
-                Shop Men
-              </button>
-            </Link>
-          </div>
-          <div className="relative grid-item2 border-2 border-[#e4e4e4] h-auto">
-            <img src={midmen2} alt="" />
-            <Link to={`/Men`}>
-              <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
-                Shop Men
-              </button>
-            </Link>
-          </div>
-          <div className="relative grid-item3 border-2 border-[#e4e4e4] h-auto">
-            <img src={midmen3} alt="" />
-            <Link to={`/Men`}>
-              <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
-                Shop Men
-              </button>
-            </Link>
-          </div>
-          <div className="relative grid-item4 border-2 border-[#e4e4e4] h-auto">
-            <img src={midmen4} alt="" />
-            <Link to={`/Men`}>
-              <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
-                Shop Men
-              </button>
-            </Link>
-          </div>
+        <div>
+          <TopSoldProducts products={filteredProducts} />
         </div>
       </div>
       <div className="container mx-auto mb-10">
         <div>
           <h2 className="text-2xl font-extrabold text-gray-900 mb-5 mt-10">
-            Shop Women's Fashion
+            Top Rated Products
           </h2>
         </div>
-        <div
-          className="grid grid-cols-2 md:grid-cols-2
-        lg:grid-cols-3 xl:grid-cols-4 gap-[30px] max-w-sm mx-auto
-        md:max-w-none md:mx-0"
-        >
-          <div className="relative grid-item1 border-2 border-[#e4e4e4] h-full">
-            <img src={midwomen1} alt="" />
-            <Link to={`/Women`}>
-              <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
-                Shop Women
-              </button>
-            </Link>
-          </div>
-          <div className="relative grid-item2 border-2 border-[#e4e4e4] h-full">
-            <img src={midwomen2} alt="" />
-            <Link to={`/Women`}>
-              <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
-                Shop Women
-              </button>
-            </Link>
-          </div>
-          <div className="relative grid-item3 border-2 border-[#e4e4e4] h-full">
-            <img src={midwomen3} alt="" />
-            <Link to={`/Women`}>
-              <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
-                Shop Women
-              </button>
-            </Link>
-          </div>
-          <div className="relative grid-item4 border-2 border-[#e4e4e4] h-full">
-            <img src={midwomen4} alt="" />
-            <Link to={`/Women`}>
-              <button className="absolute bottom-20 left-28 bg-white hover:bg-gray-200 text-black font-bold py-2 px-4 rounded">
-                Shop Women
-              </button>
-            </Link>
-          </div>
+        <div>
+          <TopRatedProducts products={filteredProducts} />
+        </div>
+      </div>
+      <div className="container mx-auto mb-10">
+        <div>
+          <h2 className="text-2xl font-extrabold text-gray-900 mb-5 mt-10">
+            Below 1K Deals
+          </h2>
+        </div>
+        <div>
+          <TopCheapProducts products={filteredProducts} />
         </div>
       </div>
     </div>

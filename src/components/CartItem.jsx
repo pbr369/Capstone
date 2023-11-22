@@ -8,7 +8,26 @@ export default function CartItem({ item }) {
   const { removeFromCart, increaseAmount, decreaseAmount } =
     useContext(CartContext);
 
-  const { id, title, image, price, amount, description, total } = item;
+  const { id, product_name, image_url_1, price, amount, description, total } = item;
+
+  function formatPrice(price) {
+
+    // Convert the price to a string
+    const priceString = price.toString();
+
+    // Split the string into whole and decimal parts
+    const [wholePart, decimalPart] = priceString.split(".");
+
+    // Add commas to the whole part for thousands
+    const formattedWholePart = wholePart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    // Combine the whole and decimal parts, and add the PHP symbol
+    const formattedPrice = `₱${formattedWholePart}${
+      decimalPart ? `.${decimalPart}` : ""
+    }`;
+
+    return formattedPrice;
+  }
 
   return (
     <div
@@ -21,7 +40,7 @@ export default function CartItem({ item }) {
       >
         {/* image */}
         <Link to={`/product/${id}`}>
-          <img className="max-w-[80px]" src={image} alt="" />
+          <img className="max-w-[80px]" src={image_url_1} alt="" />
         </Link>
         <div className="w-full flex flex-col">
           {/* title and remove ico */}
@@ -32,7 +51,7 @@ export default function CartItem({ item }) {
               className="text-sm uppercase font-medium max-w-[240px] 
           text-primary hover:underline"
             >
-              {title}
+              {product_name}
             </Link>
             {/* remove icon */}
             <div
@@ -83,14 +102,20 @@ export default function CartItem({ item }) {
               className="flex-1 flex items-center 
           justify-around"
             >
-              ${price}
+              {formatPrice(price)}
             </div>
             {/* final price */}
             <div
               className="flex flex justify-end
           items-center text-black font-medium"
-            >{`$ 
-          ${parseFloat(price * amount).toFixed(2)}`}</div>
+            >
+              {`₱${(
+                parseFloat(price.replace(/[^\d.]/g, "")) * amount
+              ).toLocaleString("en-US", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}`}
+            </div>
           </div>
         </div>
       </div>

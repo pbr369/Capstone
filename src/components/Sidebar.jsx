@@ -18,6 +18,24 @@ export default function Sidebar() {
   const { cart, clearCart, total, itemAmount, handleDelete } =
     useContext(CartContext);
   
+  function formatPrice(price) {
+    // Convert the price to a string
+    const priceString = price.toString();
+
+    // Split the string into whole and decimal parts
+    const [wholePart, decimalPart] = priceString.split(".");
+
+    // Add commas to the whole part for thousands
+    const formattedWholePart = wholePart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    // Combine the whole and decimal parts, and add the PHP symbol
+    const formattedPrice = `₱${formattedWholePart}${
+      decimalPart ? `.${decimalPart}` : ""
+    }`;
+
+    return formattedPrice;
+  }
+  
   return (
     <div>
       <div
@@ -60,8 +78,7 @@ export default function Sidebar() {
           >
             {/* total */}
             <div className="uppercase font-semibold">
-              <span className="mr-2">Total:</span>${" "}
-              {parseFloat(total).toFixed(2)}
+              <span className="mr-2">Total:</span>{formatPrice(total)}
             </div>
             {/* clear cart */}
             <div

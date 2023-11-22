@@ -8,29 +8,11 @@ import NewArrivals from "../components/NewArrivals";
 
 
 export default function Home() {
-  const { products } = useContext(ProductContext);
-
-  const filteredProducts = products.filter((item) => {
-    return item.category === "men's clothing" || item.category === "women's clothing";
-  });
-
-  // const [state, setState] = useState({
-  //   results: [],
-  // });
-
-  // const onSearch = async (text) => {
-
-  //   setState((prevState) => {
-  //     return { ...prevState, results: results };
-  //   });
-  // };
-
   return (
     <div>
       <Hero />
       <NewArrivals />
       <Middle />
-      {/* <Search results={state.results} /> */}
     </div>
   );
 };

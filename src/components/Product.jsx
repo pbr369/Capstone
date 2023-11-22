@@ -21,31 +21,31 @@ export default function Product({ product }) {
      setIsLiked(!isLiked);
 
      // Toggle the like status and add/remove the product to/from the wishlist
-     addToWish(product, id);
+     addToWish(product, product.id);
    };
 
   //
-  const { id, image_url_1, category, product_name, price, rate, brand, reviews_num } = product;
+  const { id, image_url_1, category, product_name, price, rate, brand, reviews_num, sold } = product;
   //search function
   const [searchTerm, setSearchTerm] = useState("");
 
-  function formatPrice(price) {
-    // Convert the price to a string
-    const priceString = price.toString();
+function formatPrice(price) {
+  // Convert the price to a string
+  const priceString = price.toString();
 
-    // Split the string into whole and decimal parts
-    const [wholePart, decimalPart] = priceString.split(".");
+  // Split the string into whole and decimal parts
+  const [wholePart, decimalPart] = priceString.split(".");
 
-    // Add commas to the whole part for thousands
-    const formattedWholePart = wholePart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  // Add commas to the whole part for thousands
+  const formattedWholePart = wholePart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
-    // Combine the whole and decimal parts, and add the PHP symbol
-    const formattedPrice = `₱${formattedWholePart}${
-      decimalPart ? `.${decimalPart}` : ""
-    }`;
+  // Combine the whole and decimal parts, and add the PHP symbol
+  const formattedPrice = `₱${formattedWholePart}${
+    decimalPart ? `.${decimalPart}` : ""
+  }`;
 
-    return formattedPrice;
-  }
+  return formattedPrice;
+}
   return (
     <div>
       <div
@@ -57,7 +57,7 @@ export default function Product({ product }) {
             <button onClick={toggleLike}>
               <div
                 className="flex justify-center items-center text-black 
-          w-12 h-12 absolute -top-16 -left-6"
+          w-12 h-12 absolute -top-3 -left-7"
               >
                 {isLiked ? (
                   <FaHeart className="text-md text-red-500" />
@@ -72,7 +72,7 @@ export default function Product({ product }) {
           items-center"
             >
               <img
-                className="max-h-[160px] group-hover:scale-110
+                className="max-h-[250px] group-hover:scale-110
             transition duration-300"
                 src={image_url_1}
                 alt=""
@@ -107,13 +107,13 @@ export default function Product({ product }) {
       </div>
       {/* category, title and price */}
       <div>
-        <div className="text-sm capitalize text-gray-500">
+        <div className="text-lg capitalize text-gray-700">
           {brand} / {category}
         </div>
         <Link to={`/product/${id}`}>
           <h2 className="font-semibold mb-1">{product_name}</h2>
         </Link>
-        <Star stars={rate} reviews={reviews_num}></Star>
+        <Star stars={rate} reviews={sold}></Star>
         <div className="font-semibold">{formatPrice(price)}</div>
       </div>
     </div>

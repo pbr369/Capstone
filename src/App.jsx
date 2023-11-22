@@ -14,6 +14,7 @@ import Sports from "./pages/Sports";
 import Shoes from "./pages/Shoes";
 import Bag from "./pages/Bag";
 import Jewelry from "./pages/Jewelry";
+import Shoes from "./pages/Shoes"
 //components
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Navbar";
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="/Featured" element={<Featured />} />
           <Route path="/Allproducts" element={<Allproducts />} />
           <Route path="/Men" element={<Men />} />
+          <Route path="/Shoes" element={<Shoes />} />
           <Route path="/Women" element={<Women />} />
           <Route path="/Kids" element={<Kids />} />
           <Route path="/Luxury" element={<Luxury />} />

@@ -14,7 +14,6 @@ import Sports from "./pages/Sports";
 import Shoes from "./pages/Shoes";
 import Bag from "./pages/Bag";
 import Jewelry from "./pages/Jewelry";
-import Shoes from "./pages/Shoes"
 //components
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Navbar";

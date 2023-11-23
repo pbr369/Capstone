@@ -105,7 +105,7 @@ export default function Allproducts() {
               "list-none flex justify-center items-center text-lg gap-5 px-4 py-2 cursor-pointer rounded-md font-normal"
             }
             disabledClassName={"text-gray-500 cursor-not-allowed"}
-            activeClassName={"bg-gray-700/100 text-white mx-1"}
+            activeClassName={"bg-[#1d1d1d] text-white mx-1"}
           />
         </div>
       </section>

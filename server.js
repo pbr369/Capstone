@@ -103,7 +103,7 @@ router.post("/stripe/create-checkout-session", async (req, res) => {
     mode: "payment",
     customer: customer.id,
     success_url: `${process.env.CLIENT_URL}/Checkoutsuccess`,
-    cancel_url: `${process.env.CLIENT_URL}/Featured`,
+    cancel_url: `${process.env.CLIENT_URL}/Allproducts`,
   });
 
   // res.redirect(303, session.url);

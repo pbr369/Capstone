@@ -3,10 +3,10 @@ import NewArrivals from "../components/NewArrivals";
 
 export default function Checkoutsuccess() {
   return (
-      <div>
+    <div>
       <div className="bg-gray-100">
-        
         <div className="bg-white p-6 md:mx-auto">
+          <br /> <br /> <br /> <br /> <br />
           <svg
             viewBox="0 0 24 24"
             className="text-green-600 w-16 h-16 mx-auto my-10"
@@ -32,7 +32,7 @@ export default function Checkoutsuccess() {
             <div className="py-10 text-center">
               <a
                 href="/"
-                className="px-12 bg-[#1d1d1d] hover:bg-indigo-500 text-white font-semibold py-3"
+                className="px-12 bg-[#1d1d1d] hover:bg-[#636360] text-white font-semibold py-3"
               >
                 GO BACK
               </a>

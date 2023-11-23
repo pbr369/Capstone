@@ -121,7 +121,6 @@ const hamtoggleModal = () => {
             </span>
           </a>
         </div> */}
-        <div className="grid-line"></div>
         <div className="container mx-auto flex justify-between items-center h-full py-2">
           {/* logo */}
           <Link to={"/"}>

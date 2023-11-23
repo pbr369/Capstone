@@ -27,8 +27,8 @@ export default function HamburgerMenu({ closeHamburger }) {
   
     const menuItems = [
       {
-        title: "Featured",
-        link: "/Featured",
+        title: "All Products",
+        link: "/Allproducts",
       },
       {
         title: "Men",
@@ -39,8 +39,24 @@ export default function HamburgerMenu({ closeHamburger }) {
         link: "/Women",
       },
       {
-        title: "Jewelry",
-        link: "/Jewelry",
+        title: "Kids",
+        link: "/Kids",
+      },
+      {
+        title: "Luxury",
+        link: "/Luxury",
+      },
+      {
+        title: "Sports",
+        link: "/Sports",
+      },
+      {
+        title: "Shoes",
+        link: "/Shoes",
+      },
+      {
+        title: "Bag",
+        link: "/Bag",
       },
     ];
   return (

@@ -48,7 +48,7 @@ export default function ProductDetails() {
   }
 
   //destructure product
-  const { product_name, price, description, image_url_1, image_url_2, image_url_3, image_url_4, image_url_5, rate, reviews_num } =
+  const { product_name, brand, category, price, description, image_url_1, image_url_2, image_url_3, image_url_4, image_url_5, rate, reviews_num } =
     product;
   return (
     <Wrapper>
@@ -72,40 +72,56 @@ export default function ProductDetails() {
               </div>
               <div className="flex-1 text-center lg:text-left">
                 <h1
+                  className="text-[26px] font-medium
+            max-w-[450px] mx-auto lg:mx-0 text-gray-700"
+                >
+                  {brand} / {category}
+                </h1>
+                <h1
                   className="text-[26px] font-medium mb-2 
             max-w-[450px] mx-auto lg:mx-0"
                 >
                   {product_name}
                 </h1>
-                <div className="relative">
+                <div className="relative mb-5">
                   <div className="text-xl text-red-500 font-medium mb-1">
                     {formatPrice(price)}
                   </div>
                   <Star stars={rate} reviews={reviews_num}></Star>
                 </div>
-                <p className="mb-8">
-                  Description: {<br></br>}
+                <p className="mb-8 text-gray-700 mb-5">
+                  <span className="block font-bold text-lg mb-2">
+                    Description:
+                  </span>
                   {description}
                 </p>
-                <div className="w-full flex justify-between items-stretch border-b-2 border-gray-300 mb-4 product-data-warranty">
-                  <div className="text-center flex flex-col items-center product-warranty-data">
+                <div className="w-full flex flex-wrap justify-between items-stretch border-b-2 border-gray-300 mb-4 product-data-warranty">
+                  <div className="text-center flex flex-col items-center product-warranty-data w-full sm:w-1/2 md:w-1/2 lg:w-1/4">
                     <TbTruckDelivery className="bg-gray-200 rounded-full w-16 h-16 p-2 warranty-icon" />
-                    <p className="text-lg p-4">Free Delivery</p>
+                    <p className="text-base md:text-lg lg:text-lg p-2 md:p-4">
+                      Cash on Delivery
+                    </p>
                   </div>
 
-                  <div className="text-center flex flex-col items-center product-warranty-data">
+                  <div className="text-center flex flex-col items-center product-warranty-data w-full sm:w-1/2 md:w-1/2 lg:w-1/4">
                     <TbReplace className="bg-gray-200 rounded-full w-16 h-16 p-2 warranty-icon" />
-                    <p className="text-lg p-4">30 Days Replacement</p>
+                    <p className="text-base md:text-lg lg:text-lg p-2 md:p-4">
+                      30 Days Free Returns
+                    </p>
                   </div>
 
-                  <div className="text-center flex flex-col items-center product-warranty-data">
+                  <div className="text-center flex flex-col items-center product-warranty-data w-full sm:w-1/2 md:w-1/2 lg:w-1/4">
                     <TbTruckDelivery className="bg-gray-200 rounded-full w-16 h-16 p-2 warranty-icon" />
-                    <p className="text-lg p-4">Fast Delivery </p>
+                    <p className="text-base md:text-lg lg:text-lg p-2 md:p-4">
+                      Fast Delivery
+                    </p>
                   </div>
 
-                  <div className="text-center flex flex-col items-center product-warranty-data">
+                  <div className="text-center flex flex-col items-center product-warranty-data w-full sm:w-1/2 md:w-1/2 lg:w-1/4">
                     <MdSecurity className="bg-gray-200 rounded-full w-16 h-16 p-2 warranty-icon" />
-                    <p className="text-lg p-4">2 Year Warranty </p>
+                    <p className="text-base md:text-lg lg:text-lg p-2 md:p-4">
+                      100% Authentic
+                    </p>
                   </div>
                 </div>
                 <button

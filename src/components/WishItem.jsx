@@ -8,7 +8,7 @@ export default function WishItem({ item }) {
   const { removeFromWish, increaseAmount, decreaseAmount } =
     useContext(AddWishList);
 
-  const { id, product_name, image_url_1 } = item;
+  const { id, brand, product_name, image_url_1 } = item;
 
   return (
     <div
@@ -32,7 +32,7 @@ export default function WishItem({ item }) {
               className="text-sm uppercase font-medium max-w-[240px] 
           text-primary hover:underline"
             >
-              {product_name}
+              {brand} / {product_name}
             </Link>
             {/* remove icon */}
             <div

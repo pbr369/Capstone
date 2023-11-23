@@ -49,3 +49,7 @@
 .btn-color {
   background-color: #1D1D1D;
 }
+
+.checkout-success-container {
+  margin-top: 1.25rem; /* or any other value that suits your design */
+}

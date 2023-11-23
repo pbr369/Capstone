@@ -33,10 +33,10 @@ router.post("/stripe/create-checkout-session", async (req, res) => {
   const line_items = req.body.cartItems.map((item) => {
     return {
       price_data: {
-        currency: "usd",
+        currency: "php",
         product_data: {
-          name: item.title,
-          images: [item.image], // Wrap the image in an array if it's a single string
+          name: `${item.brand} ${" / "} ${item.product_name}`,
+          images: [item.image_url_1], // Wrap the image in an array if it's a single string
           metadata: {
             id: item.id,
           },
@@ -58,7 +58,7 @@ router.post("/stripe/create-checkout-session", async (req, res) => {
           type: "fixed_amount",
           fixed_amount: {
             amount: 0,
-            currency: "usd",
+            currency: "php",
           },
           display_name: "Free shipping",
           // Delivers between 5-7 business days
@@ -78,8 +78,8 @@ router.post("/stripe/create-checkout-session", async (req, res) => {
         shipping_rate_data: {
           type: "fixed_amount",
           fixed_amount: {
-            amount: 1500,
-            currency: "usd",
+            amount: 50000,
+            currency: "php",
           },
           display_name: "Next day air",
           // Delivers in exactly 1 business day

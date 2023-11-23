@@ -13,7 +13,8 @@ import Luxury from "./pages/Luxury";
 import Sports from "./pages/Sports";
 import Shoes from "./pages/Shoes";
 import Bag from "./pages/Bag";
-import Jewelry from "./pages/Jewelry";
+import Aboutus from "./pages/Aboutus";
+import Terms from "./pages/Terms";
 //components
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Navbar";
@@ -48,6 +49,8 @@ export default function App() {
           <Route path="/Sports" element={<Sports />} />
           <Route path="/Shoes" element={<Shoes />} />
           <Route path="/Bag" element={<Bag />} />
+          <Route path="/Aboutus" element={<Aboutus />} />
+          <Route path="/Terms" element={<Terms />} />
           <Route path="/Login" element={<Login />} />
           <Route element={<RequireAuth allowedRoles={[ROLES.User]} />}>
             <Route path="/" element={<Home />} />

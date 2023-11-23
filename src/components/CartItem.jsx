@@ -8,10 +8,10 @@ export default function CartItem({ item }) {
   const { removeFromCart, increaseAmount, decreaseAmount } =
     useContext(CartContext);
 
-  const { id, product_name, image_url_1, price, amount, description, total } = item;
+  const { id, brand, product_name, image_url_1, price, amount, description, total } =
+    item;
 
   function formatPrice(price) {
-
     // Convert the price to a string
     const priceString = price.toString();
 
@@ -51,7 +51,7 @@ export default function CartItem({ item }) {
               className="text-sm uppercase font-medium max-w-[240px] 
           text-primary hover:underline"
             >
-              {product_name}
+              {brand} / {product_name}
             </Link>
             {/* remove icon */}
             <div
@@ -121,4 +121,4 @@ export default function CartItem({ item }) {
       </div>
     </div>
   );
-};
+}

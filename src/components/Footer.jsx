@@ -35,24 +35,24 @@ export default function Footer() {
             </p>
 
             <div className="flex flex-col items-start mt-5 space-y-2">
-              <a
-                href="/"
+              <Link
+                to="/"
                 className="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
                 Home
-              </a>
-              <a
-                href="/"
+              </Link>
+              <Link
+                to="/Aboutus"
                 className="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
-                About us
-              </a>
-              <a
-                href="/"
+                About Us
+              </Link>
+              <Link
+                to="/Terms"
                 className="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
-                Blogs
-              </a>
+                Terms and Conditions
+              </Link>
             </div>
           </div>
 
@@ -75,10 +75,34 @@ export default function Footer() {
                 Women
               </Link>
               <Link
-                to="/Jewelry"
+                to="/Kids"
                 className="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:text-blue-500"
               >
-                Jewelry
+                Kids
+              </Link>
+              <Link
+                to="/Luxury"
+                className="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+              >
+                Luxury
+              </Link>
+              <Link
+                to="/Sports"
+                className="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+              >
+                Sports
+              </Link>
+              <Link
+                to="/Shoes"
+                className="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+              >
+                Shoes
+              </Link>
+              <Link
+                to="/Bag"
+                className="text-gray-600 transition-colors duration-300 dark:text-black dark:hover:text-blue-400 hover:underline hover:text-blue-500"
+              >
+                Bag
               </Link>
             </div>
           </div>

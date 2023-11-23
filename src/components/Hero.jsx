@@ -24,7 +24,7 @@ export default function Hero() {
               <span className="font-semibold text-white">NEW ARRIVALS</span>
             </h1>
             <Link
-              to={"/"}
+              to={"/Allproducts"}
               className="self-start uppercase font-semibold border-b-2
       border-primary border-white text-white"
             >

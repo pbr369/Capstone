@@ -62,10 +62,10 @@ export default function NewArrivals() {
                 <h3 className="text-center">
                   <Link
                     className="text-white text-2xl font-bold text-center"
-                    to={`/Jewelry`}
+                    to={`/Luxury`}
                   >
                     <span className="absolute inset-0" />
-                    Jewelry
+                    Luxury
                   </Link>
                 </h3>
               </div>

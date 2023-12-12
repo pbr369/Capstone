@@ -1,191 +1,283 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { BiUser } from "react-icons/bi";
-import { AiOutlineUnlock } from "react-icons/ai";
 
 export default function Register() {
       
-    const [registerEmail, setRegisterEmail] = useState("");
-    const [registerPassword, setRegisterPassword] = useState("");
-    const [confirmPassword, setconfirmPassword] = useState("");
-    const [registerErrors, setRegisterErrors] = useState({});
+      const [name, setName] = useState("");
+      const [email, setEmail] = useState("");
+      const [password, setPassword] = useState("");
+      const [redirect, setRedirect] = useState(false);
+      const navigate = useNavigate();
+      const roles = "user";
 
-    const validateRegister = () => {
-      let errors = {};
+      const submit = async (e) => {
+        e.preventDefault();
 
-      const emailreg = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-      if (!registerEmail) {
-        errors.email = "Please enter a valid email address";
-      } else if (!emailreg.test(registerEmail)) {
-        errors.email = "Include @ on the email address";
-      } else {
-        errors.email = "";
-      }
+        console.log("Submitting:", { name, email, password, roles });
 
-      if (!registerPassword) {
-        errors.password = "Create a unique password ";
-      } else if (registerPassword.length < 8) {
-        errors.password = "Passwords must be at least 8 characters long";
-      } else {
-        errors.password = "";
-      }
+        try {
+          const response = await fetch("http://localhost:8000/api/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name,
+              email,
+              password,
+              roles, // Assuming "user" is the default role for registration
+            }),
+          });
 
-      if (confirmPassword != registerPassword) {
-        errors.confirmPassword = "Confirm Password ";
-      }
+          const content = await response.json();
+          console.log("Registration Response:", content);
 
-      setRegisterErrors(errors);
+          if (response.ok) {
+            // Registration successful, you might want to handle this differently
+            console.log("Registration successful");
+            navigate("/Login");
+          } else {
+            // Handle registration failure
+            console.error("Registration failed");
+          }
+        } catch (error) {
+          // Handle network or other errors
+          console.error("Error during registration:", error);
+        }
+      };
 
-      return Object.keys(errors).length === 0;
-    };
+  if (redirect) {
+    navigate("/");
+    return null;
+  }
 
-    useEffect(() => {
-      const timeout = setTimeout(() => {
-        validateRegister();
-      }, 100);
-
-      return () => clearTimeout(timeout);
-    }, [, registerEmail, registerPassword]);
-
-    const handleRegisterSubmit = (e) => {
-      e.preventDefault();
-
-      const isValid = validateRegister();
-
-      if (isValid) {
-        // submit form
-      }
-    };
   return (
     <div>
-      <div className="text-white h-[100vh] flex justify-center bg-cover items-center bg-white">
-        <div>
-          <div
-            className="bg-slate-800 border border-slate-400 rounded-md p-8 shadow-lg 
-        backdrop-filter backdrop-blur-sm bg-opacity-30 relative"
-          >
-            <h1 className="text-4xl text-black font-bold text-center mb-6">
-              Register
-            </h1>
-            <form action="" onSubmit={handleRegisterSubmit}>
-              <div className="relative my-4">
-                <input
-                  type="email"
-                  className="block w-72 py-2.3 text-sm 
-                    text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none
-                    dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus-text-black
-                    focus:border-blue-600 peer "
-                  placeholder=""
-                  name="regsiter-email"
-                  id="register-email"
-                  value={registerEmail}
-                  onInput={(e) => setRegisterEmail(e.target.value)}
-                />
-
+      <header>
+        <link
+          rel="stylesheet"
+          href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+          crossOrigin="anonymous"
+        />
+      </header>
+      <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100">
+        <div
+          className="
+    flex flex-col
+    bg-white
+    shadow-md
+    px-4
+    sm:px-6
+    md:px-8
+    lg:px-10
+    py-8
+    rounded-3xl
+    w-50
+    max-w-md
+  "
+        >
+          <div className="font-medium self-center text-xl sm:text-3xl text-gray-800">
+            Join us Now
+          </div>
+          <div className="mt-4 self-center text-xl sm:text-sm text-gray-800">
+            Enter your credentials to get access account
+          </div>
+          <div className="mt-10">
+            <form onSubmit={submit}>
+              <div className="flex flex-col mb-5">
                 <label
-                  htmlFor=""
-                  className="absolute text-sm text-black duration-300
-                    transform -translate-y-6 scale-75 top-1 -z-10 origin-[0] peer-focus:left-0
-                    peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100
-                     peer-placeholder-shown:translate-y-0
-                    peer-focus:scale-75 peer-focus:-translate-y-6"
+                  htmlFor="email"
+                  className="mb-1 text-xs tracking-wide text-gray-600"
                 >
-                  Register Email
+                  Name:
                 </label>
-                <BiUser className="text-black absolute top-1 right-1" />
+                <div className="relative">
+                  <div
+                    className="
+              inline-flex
+              items-center
+              justify-center
+              absolute
+              left-0
+              top-0
+              h-full
+              w-10
+              text-gray-400
+            "
+                  >
+                    <i className="fas fa-user text-bg-[#1d1d1d]" />
+                  </div>
+                  <input
+                    id="name"
+                    type="name"
+                    name="name"
+                    className="
+              text-sm
+              placeholder-gray-500
+              pl-10
+              pr-4
+              rounded-2xl
+              border border-gray-400
+              w-full
+              py-2
+              focus:outline-none focus:border-blue-400
+            "
+                    placeholder="Enter your name"
+                    required
+                    onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
               </div>
-              {registerErrors.email && (
-                <p className="text-sm text-red-500 -mt-3">
-                  {registerErrors.email}
-                </p>
-              )}
-              <div className="relative my-4">
-                <input
-                  type="password"
-                  className="block w-72 py-2.3 text-sm 
-                    text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none
-                    dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-black
-                    focus:border-blue-600 peer "
-                  placeholder=""
-                  name="register-password"
-                  id="register-password"
-                  value={registerPassword}
-                  onInput={(e) => setRegisterPassword(e.target.value)}
-                />
-
+              <div className="flex flex-col mb-5">
                 <label
-                  htmlFor=""
-                  className="absolute text-sm text-black duration-300
-                    transform -translate-y-6 scale-75 top-1 -z-100 origin-[0] peer-focus:left-0
-                    peer-focus:text-blue-600 peer-focus:dark:text-blue-500 
-                    peer-placeholder-shown:scale-100
-                     peer-placeholder-shown:translate-y-0
-                    peer-focus:scale-75 peer-focus:-translate-y-6
-                    "
+                  htmlFor="email"
+                  className="mb-1 text-xs tracking-wide text-gray-600"
                 >
-                  Your Password
+                  E-Mail Address:
                 </label>
-                <AiOutlineUnlock className="text-black absolute top-1 right-1" />
+                <div className="relative">
+                  <div
+                    className="
+              inline-flex
+              items-center
+              justify-center
+              absolute
+              left-0
+              top-0
+              h-full
+              w-10
+              text-gray-400
+            "
+                  >
+                    <i className="fas fa-at text-bg-[#1d1d1d]" />
+                  </div>
+                  <input
+                    id="email"
+                    type="email"
+                    name="email"
+                    className="
+              text-sm
+              placeholder-gray-500
+              pl-10
+              pr-4
+              rounded-2xl
+              border border-gray-400
+              w-full
+              py-2
+              focus:outline-none focus:border-blue-400
+            "
+                    placeholder="Enter your email"
+                    required
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
               </div>
-              {registerErrors.password && (
-                <p className="text-sm text-red-500 -mt-3">
-                  {registerErrors.password}
-                </p>
-              )}
-
-              <div className="relative my-4">
-                <input
-                  type="password"
-                  className="block w-72 py-2.3 text-sm 
-                    text-black bg-transparent border-0 border-b-2 border-gray-300 appearance-none
-                    dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:text-black
-                    focus:border-blue-600 peer "
-                  placeholder=""
-                  name="register-password"
-                  id="register-password"
-                  value={confirmPassword}
-                  onInput={(e) => setconfirmPassword(e.target.value)}
-                />
-
+              <div className="flex flex-col mb-6">
                 <label
-                  htmlFor=""
-                  className="absolute text-sm text-black duration-300
-                    transform -translate-y-6 scale-75 top-1 -z-100 origin-[0] peer-focus:left-0
-                    peer-focus:text-blue-600 peer-focus:dark:text-blue-500 
-                    peer-placeholder-shown:scale-100
-                     peer-placeholder-shown:translate-y-0
-                    peer-focus:scale-75 peer-focus:-translate-y-6
-                    "
+                  htmlFor="password"
+                  className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
                 >
-                  Confirm Password
+                  Password:
                 </label>
-                <AiOutlineUnlock className="text-black absolute top-1 right-1" />
+                <div className="relative">
+                  <div
+                    className="
+              inline-flex
+              items-center
+              justify-center
+              absolute
+              left-0
+              top-0
+              h-full
+              w-10
+              text-gray-400
+            "
+                  >
+                    <span>
+                      <i className="fas fa-lock text-bg-[#1d1d1d]" />
+                    </span>
+                  </div>
+                  <input
+                    id="password"
+                    type="password"
+                    name="password"
+                    className="
+              text-sm
+              placeholder-gray-500
+              pl-10
+              pr-4
+              rounded-2xl
+              border border-gray-400
+              w-full
+              py-2
+              focus:outline-none focus:border-blue-400
+            "
+                    placeholder="Enter your password"
+                    required
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
               </div>
-              {registerErrors.confirmPassword && (
-                <p className="text-sm text-red-500 -mt-3">
-                  {registerErrors.confirmPassword}
-                </p>
-              )}
-
-              <button
-                value="Send"
-                className="w-full mb-4 text-[18px] mt-6 rounded-full bg-white text-black
-                hover:bg-black hover:text-white py-2 transition-color duration-300"
-                type="submit"
-              >
-                Create an Account
-              </button>
-
-              <div>
-                <span className="m-4 text-black">
-                  Already Create an Account?{" "}
-                  <Link to="/Login" className="text-blue-500">
-                    Login
-                  </Link>
-                </span>
+              <div className="flex w-full">
+                <button
+                  type="submit"
+                  className="
+            flex
+            mt-2
+            items-center
+            justify-center
+            focus:outline-none
+            text-white text-sm
+            sm:text-base
+            bg-[#1d1d1d]
+            hover:bg-blue-600
+            rounded-2xl
+            py-2
+            w-full
+            transition
+            duration-150
+            ease-in
+          "
+                >
+                  <span className="mr-2 uppercase">Sign Up</span>
+                  <span>
+                    <svg
+                      className="h-6 w-6"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </span>
+                </button>
               </div>
             </form>
           </div>
+        </div>
+        <div className="flex justify-center items-center mt-6">
+          <a
+            href="#"
+            target="_blank"
+            className="
+      inline-flex
+      items-center
+      text-gray-700
+      font-medium
+      text-xs text-center
+    "
+          >
+            <span className="ml-2">You have an account?</span>
+          </a>
+          <Link
+            to="/Login"
+            className="text-xs ml-2 text-blue-500 font-semibold"
+          >
+            Login Here
+          </Link>
         </div>
       </div>
     </div>

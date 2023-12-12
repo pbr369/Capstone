@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { AuthProvider } from "./contexts/AuthContext";
 import "./index.css";
 import App from "./App";
 import ProductProvider from "./contexts/ProductContext";
@@ -11,17 +12,19 @@ import CartProvider from "./contexts/CartContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <SidebarProvider>
-    <WishListProvider>
-      <CartProvider>
-        <ProductProvider>
-          <AddWishProvider>
-            <React.StrictMode>
+  <AuthProvider>
+    <SidebarProvider>
+      <WishListProvider>
+        <CartProvider>
+          <ProductProvider>
+            <AddWishProvider>
+              <React.StrictMode>
                 <App />
-            </React.StrictMode>
-          </AddWishProvider>
-        </ProductProvider>
-      </CartProvider>
-    </WishListProvider>
-  </SidebarProvider>
+              </React.StrictMode>
+            </AddWishProvider>
+          </ProductProvider>
+        </CartProvider>
+      </WishListProvider>
+    </SidebarProvider>
+  </AuthProvider>
 );

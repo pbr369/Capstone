@@ -1,17 +1,6 @@
 import React, { useState, useContext } from "react";
 //
 import { Link } from "react-router-dom";
-//icon
-import { IoMdArrowForward } from "react-icons/io";
-import { FiTrash2 } from "react-icons/fi";
-//components
-import CartItem from "./CartItem";
-//sidebar context
-import { SidebarContext } from "../contexts/SidebarContext";
-//cart context
-import { CartContext } from "../contexts/CartContext";
-import Dialog from "../components/Dialog";
-import PayButton from "./PayButton";
 
 
 export default function HamburgerMenu({ closeHamburger }) {

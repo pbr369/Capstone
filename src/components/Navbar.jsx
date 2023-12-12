@@ -7,41 +7,18 @@ import { Link } from "react-router-dom";
 //icons
 import { BsBag } from "react-icons/bs";
 import Logo from "../img/logo.png";
-//import search icon
-import { AiOutlineSearch } from "react-icons/ai";
 import { FaRegUser, FaRegHeart } from "react-icons/fa";
-import { RxHamburgerMenu } from "react-icons/rx";
-//redux
-import { useDispatch } from "react-redux";
-//import searchbar
-import SearchBar from "./SearchBar";
-import Search from "./Search";
 import Login from "../pages/Login";
 import Wishlist from "./Wishlist";
 import HamburgerMenu from "./HamburgerMenu";
+import UserProfile from "./UserProfile";
+import UserProfileSidebar from "./UserProfileSidebar";
 
-export default function Navbar() {
+export default function Navbar({ name, setName, roles, setRoles }) {
   //headerstate
-  const [isActive, setIsActive] = useState(true);
   const { isOpen, setIsOpen } = useContext(SidebarContext);
   const { wishlistOpen, setWishlistOpen } = useContext(WishListContext);
   const { itemAmount } = useContext(CartContext);
-  const [searchResults, setSearchResults] = useState([]);
-  
-  //event listener
-
-  //search
-  const [state, setState] = useState({
-    results: [],
-  });
-
-  const onSearch = async (text) => {
-    const results = setSearchResults(text);
-    setState((prevState) => {
-      setSearchResults(results);
-      return { ...prevState, results: results };
-    });
-  };
 
   //modal
   const [modalOpen, setModalOpen] = useState(false);
@@ -52,10 +29,40 @@ export default function Navbar() {
   };
 
   const [hamburgerOpen, setHamburgerOpen] = useState(false);
-const hamtoggleModal = () => {
-  setHamburgerOpen(!hamburgerOpen);
-};
-  //bagong add
+  const hamtoggleModal = () => {
+    setHamburgerOpen(!hamburgerOpen);
+  };
+
+  //usersidebar
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarVisible(!isSidebarVisible);
+  };
+
+  // Assuming you have a function to clear cookies
+  function clearCookies() {
+    document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  }
+
+  async function logout() {
+    try {
+      await fetch("http://localhost:8000/api/logout", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      // Clear the 'jwt' cookie on the client side
+      clearCookies();
+
+      window.location.reload();
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  }
+
   const menuItems = [
     {
       title: "All Products",
@@ -91,36 +98,12 @@ const hamtoggleModal = () => {
     },
   ];
 
-  // to change burger classes
-  const [burger_class, setBurgerClass] = useState("burger-bar unclicked");
-  const [menu_class, setMenuClass] = useState("menu hidden");
-  const [isMenuClicked, setIsMenuClicked] = useState(false);
-
-  // toggle burger menu change
-  const updateMenu = () => {
-    if (!isMenuClicked) {
-      setBurgerClass("burger-bar clicked");
-      setMenuClass("menu visible");
-    } else {
-      setBurgerClass("burger-bar unclicked");
-      setMenuClass("menu hidden");
-    }
-    setIsMenuClicked(!isMenuClicked);
-  };
-
   return (
     <div>
       <div
         className="bg-black-navbar shadow-md bg-none
     fixed w-full z-10 transition-all"
       >
-        {/* <div className="text-center py-2">
-          <a href="#">
-            <span className="text-white">
-              FREE SHIPPING ORDERS 1,000+ & FREE RETURNS
-            </span>
-          </a>
-        </div> */}
         <div className="container mx-auto flex justify-between items-center h-full py-2">
           {/* logo */}
           <Link to={"/"}>
@@ -135,22 +118,28 @@ const hamtoggleModal = () => {
               </Link>
             ))}
           </div>
-          {/* justify end search and cart */}
-
-          {/* search bar */}
-           {/* <div className="hidden lg:flex">
-            <SearchBar onSearch={onSearch} />
-          </div> */}
           {/* cart */}
 
           {/* reg */}
           <div className="cursor-pointer flex relative">
-            <div className="px-2">
-              <FaRegUser
-                onClick={toggleModal}
-                className="text-2xl text-white"
-              />
+            <div className="px-2 flex">
+              {/* Display the user's name here */}
+              {name ? (
+                // Render user profile if the user is logged in
+                <UserProfile
+                  name={name}
+                  handleLogout={logout}
+                  showSidebar={toggleSidebar}
+                />
+              ) : (
+                // Render login button if the user is not logged in
+                <FaRegUser
+                  onClick={toggleModal}
+                  className="text-2xl text-white"
+                />
+              )}
             </div>
+            {/* Conditionally render the logout button if the user is logged in */}
             {/* wishlist */}
             <div
               className="px-2"
@@ -189,9 +178,22 @@ const hamtoggleModal = () => {
           </div>
         </div>
       </div>
-      {modalOpen && <Login closeLoginModal={toggleModal} />}
+      {modalOpen && (
+        <Login
+          closeLoginModal={toggleModal}
+          setName={setName}
+          setRoles={setRoles}
+        />
+      )}
       {wishlistOpen && <Wishlist />}
       {hamburgerOpen && <HamburgerMenu closeHamburger={hamtoggleModal} />}
+      {isSidebarVisible && (
+        <UserProfileSidebar
+          name={name}
+          roles={roles}
+          closeUserProfile={() => setIsSidebarVisible(!isSidebarVisible)}
+        />
+      )}
     </div>
   );
 };

@@ -1,26 +1,18 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { BiUser } from "react-icons/bi";
-import { AiOutlineUnlock } from "react-icons/ai";
-import { IoMdAdd, IoMdClose, IoMdRemove } from "react-icons/io";
-import Navbar from "../components/Navbar";
-import useAuth from "../hooks/useAuth";
+import { IoMdClose } from "react-icons/io";
 
-import axios from "../api/axios";
-const LOGIN_URL = "";
-
-export default function Login({ closeLoginModal }) {
-  const { setAuth } = useAuth();
-
+const Login = ({ closeLoginModal, setName, setRoles }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [redirect, setRedirect] = useState(false);
   const from = location.state?.from?.pathname || "/";
 
   const userRef = useRef();
   const errRef = useRef();
 
-  const [user, setUser] = useState("");
-  const [pwd, setPwd] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
 
   useEffect(() => {
@@ -29,51 +21,56 @@ export default function Login({ closeLoginModal }) {
 
   useEffect(() => {
     setErrMsg("");
-  }, [user, pwd]);
+  }, [email, password]);
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+useEffect(() => {
+  if (redirect) {
+    const redirectTimeout = setTimeout(() => {
+      modalOpenFunction();
+      navigate("/Allproducts");
+    }, 100); // Adjust the delay as needed
 
-  try {
-    const response = await axios.post(
-      LOGIN_URL,
-      JSON.stringify({ username: user, password: pwd }),
-      {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      }
-    );
-
-    console.log(JSON.stringify(response.data));
-
-    // Check the status code
-    if (response.status === 200) {
-      const accessToken = response.data.accessToken;
-      const roles = response.data.roles;
-      setAuth({ user, pwd, roles, accessToken });
-      setUser("");
-      setPwd("");
-      navigate(from, { replace: true });
-    } else if (response.status === 401) {
-      setErrMsg("Unauthorized");
-      errRef.current.focus();
-    } else {
-      setErrMsg("Login Failed");
-      errRef.current.focus();
-    }
-  } catch (err) {
-    if (!err?.response) {
-      setErrMsg("No Server Response");
-    } else if (err.response?.status === 400) {
-      setErrMsg("Missing Username or Password");
-    } else {
-      setErrMsg("Login Failed");
-    }
-    errRef.current.focus();
+    return () => clearTimeout(redirectTimeout);
   }
+}, [redirect, navigate]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:8000/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+
+      const content = await response.json();
+
+      if (content.message === "Login successful") {
+        localStorage.setItem("token", content.token);
+        setRoles(content.user.roles);
+        setName(content.user.name);
+        console.log("Redirecting...");
+        setRedirect(true);
+      } else if (content.status === 401) {
+        setErrMsg("Unauthorized");
+        errRef.current.focus();
+      } else {
+        console.error("Login failed:", content);
+        setErrMsg("Login Failed");
+        errRef.current.focus();
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
   };
-  
+
   const modalOpenFunction = () => {
+    console.log("Closing modal");
     closeLoginModal(); // Close the modal
   };
 
@@ -123,14 +120,14 @@ const handleSubmit = async (e) => {
                     />
                   </svg>
                   <input
-                    id="username"
+                    id="email"
                     className=" pl-2 w-full outline-none border-none"
-                    type="text"
-                    placeholder="Username"
+                    type="email"
+                    placeholder="Email"
                     ref={userRef}
                     autoComplete="off"
-                    onChange={(e) => setUser(e.target.value)}
-                    value={user}
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                     required
                   />
                 </div>
@@ -154,7 +151,7 @@ const handleSubmit = async (e) => {
                     id="password"
                     placeholder="Password"
                     onChange={(e) => setPwd(e.target.value)}
-                    value={pwd}
+                    value={password}
                     required
                   />
                 </div>
@@ -183,4 +180,6 @@ const handleSubmit = async (e) => {
       </div>
     </div>
   );
-}
+};
+
+export default Login;

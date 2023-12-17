@@ -23,7 +23,7 @@ const Updatepassword = () => {
 
     // Make an API call to update the password
     try {
-      const token = localStorage.getItem("token"); // Retrieve the user's token from localStorage
+      const token = localStorage.getItem("token");
 
       const response = await fetch(
         "http://localhost:8000/api/update-password",
@@ -31,7 +31,8 @@ const Updatepassword = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // Include the user's token in the headers
+            Authorization: `Bearer ${token}`,
+            credentials: "include",
           },
           body: JSON.stringify({
             current_password: currentPassword,
@@ -41,21 +42,26 @@ const Updatepassword = () => {
         }
       );
 
+      // Check if the response is not JSON
+      if (!response.ok) {
+        throw new Error(
+          `Failed to update password. HTTP status: ${response.status}`
+        );
+      }
+
       const result = await response.json();
 
-      if (response.ok) {
-        // Password updated successfully
-        setErrorMessage("");
-        // You may want to redirect or display a success message
-      } else {
-        // Password update failed
-        setErrorMessage(result.message || "Failed to update password");
-      }
+      // Password updated successfully
+      setErrorMessage("");
+      // You may want to redirect or display a success message
     } catch (error) {
       console.error("Error updating password:", error);
-      setErrorMessage("An error occurred while updating the password");
+      setErrorMessage(
+        "An error occurred while updating the password. Please try again later."
+      );
     }
   };
+  
     return (
         <div>
             <br /><br /><br /><br /><br /><br /><br /><br /><br />

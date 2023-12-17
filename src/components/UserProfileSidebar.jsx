@@ -15,7 +15,7 @@ export default function UserProfileSidebar({ name, roles = [], closeUserProfile 
   const menuItems = [
     {
       title: "Change Name",
-      link: "/Changename",
+      link: "/Updateprofile",
     },
     {
       title: "Change Address",
@@ -23,7 +23,7 @@ export default function UserProfileSidebar({ name, roles = [], closeUserProfile 
     },
     {
       title: "Change Password",
-      link: "/Changepass",
+      link: "/Updatepassword",
     },
     // Add the "Admin Panel" link conditionally based on the user's role
     ...(roles.includes("admin")

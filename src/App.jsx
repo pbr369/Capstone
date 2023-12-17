@@ -51,7 +51,6 @@ export default function App() {
           }
 
           const content = await response.json();
-          console.log("Fetched user data:", content);
           setName(content.name);
           setRoles(content.roles);
         } catch (error) {

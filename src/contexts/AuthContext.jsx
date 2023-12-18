@@ -7,15 +7,21 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userRoles, setUserRoles] = useState([]);
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        if (token) {
-          // Include the token in the Authorization header for authenticated requests
-          axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-          setIsAuthenticated(true);
-        } else {
-          setIsAuthenticated(false);
-        }
+  useEffect(() => {
+    // Get the token from cookies
+    const tokenCookie = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith("jwt="))
+      ?.split("=")[1];
+
+    if (tokenCookie) {
+      // Include the token in the Authorization header for authenticated requests
+      axios.defaults.headers.common["Authorization"] = `Bearer ${tokenCookie}`;
+      setIsAuthenticated(true);
+    } else {
+      setIsAuthenticated(false);
+    }
+
     const fetchUserData = async () => {
       try {
         const response = await axios.get("http://127.0.0.1:8000/api/user", {
@@ -32,7 +38,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     fetchUserData();
-  }, []); // Empty dependency array to execute only once when the component mounts
+  }, []); // Empty
 
   const login = (userData) => {
     // Your authentication logic here

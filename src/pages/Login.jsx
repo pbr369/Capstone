@@ -54,7 +54,7 @@ useEffect(() => {
         localStorage.setItem("token", content.token);
         setRoles(content.user.roles);
         setName(content.user.name);
-        console.log("Redirecting...");
+        console.log(content.token);
         setRedirect(true);
       } else if (content.status === 401) {
         setErrMsg("Unauthorized");

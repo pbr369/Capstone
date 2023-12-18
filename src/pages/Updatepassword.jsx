@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 const Updatepassword = () => {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -25,20 +26,19 @@ const Updatepassword = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch(
+      console.log("Token:", token);
+      const response = await axios.put(
         "http://localhost:8000/api/update-password",
         {
-          method: "PUT",
+          currentPassword: currentPassword,
+          newPassword: newPassword,
+          confirmPassword: confirmPassword,
+        },
+        {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
-            credentials: "include",
           },
-          body: JSON.stringify({
-            current_password: currentPassword,
-            new_password: newPassword,
-            confirm_password: confirmPassword,
-          }),
         }
       );
 
@@ -61,7 +61,7 @@ const Updatepassword = () => {
       );
     }
   };
-  
+
     return (
         <div>
             <br /><br /><br /><br /><br /><br /><br /><br /><br />

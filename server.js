@@ -2,6 +2,7 @@ import express from "express";
 import Stripe from "stripe";
 import dotenv from "dotenv";
 import cors from "cors"; // Import the cors middleware
+import axios from "axios";
 
 dotenv.config();
 
@@ -113,57 +114,38 @@ router.post("/stripe/create-checkout-session", async (req, res) => {
 // Create order function
 
 const createOrder = async (customer, data) => {
-  const Items = JSON.parse(customer.metadata.cart);
+  const items = JSON.parse(customer.metadata.cart);
 
-  const products = Items.map((item) => {
+  const products = items.map((item) => {
     return {
-      productId: item.id,
+      product_id: item.id,
       quantity: item.cartQuantity,
     };
   });
 
-  const newOrder = new Order({
-    userId: customer.metadata.userId,
-    customerId: data.customer,
-    paymentIntentId: data.payment_intent,
-    products,
-    subtotal: data.amount_subtotal,
-    total: data.amount_total,
-    shipping: data.customer_details,
-    payment_status: data.payment_status,
-  });
-
   try {
-    const savedOrder = await newOrder.save();
+    // Save the order to Stripe
+    const savedOrder = await Order.create({
+      user_id: customer.metadata.userId,
+      products: JSON.stringify(products),
+      payment_intent_id: data.payment_intent,
+      subtotal: data.amount_subtotal,
+      total: data.amount_total,
+      shipping: JSON.stringify(data.customer_details),
+      payment_status: data.payment_status,
+    });
+
     console.log("Processed Order:", savedOrder);
+
+    // Save the user to Laravel
+    await axios.post("http://127.0.0.1:8000/api/stripe/webhook", {
+      user_id: customer.metadata.userId,
+      // other user details...
+    });
   } catch (err) {
     console.log(err);
   }
 };
-
-// Stripe webhoook
-// This is your Stripe CLI webhook secret for testing your endpoint locally.
-// const endpointSecret = "whsec_40c7c8fa5f94d7be3348e09a3f11a2089d441f3787c325ca573af5f8ed191de5";
-
-// router.post('/webhook', express.raw({type: 'application/json'}), (request, response) => {
-//   const sig = request.headers['stripe-signature'];
-
-//   let event;
-
-//   try {
-//     event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
-//   } catch (err) {
-//     response.status(400).send(`Webhook Error: ${err.message}`);
-//     return;
-//   }
-
-//   // Handle the event
-
-
-//   // Return a 200 response to acknowledge receipt of the event
-//   response.send().end();
-// });
-
 
 router.post(
   "/webhook",

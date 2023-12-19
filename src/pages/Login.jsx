@@ -2,11 +2,10 @@ import React, { useRef, useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { IoMdClose } from "react-icons/io";
 
-const Login = ({ closeLoginModal, setName, setRoles }) => {
+const Login = ({ setName, setRoles }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [redirect, setRedirect] = useState(false);
-  const from = location.state?.from?.pathname || "/";
 
   const userRef = useRef();
   const errRef = useRef();
@@ -26,7 +25,6 @@ const Login = ({ closeLoginModal, setName, setRoles }) => {
 useEffect(() => {
   if (redirect) {
     const redirectTimeout = setTimeout(() => {
-      modalOpenFunction();
       navigate("/Allproducts");
     }, 100); // Adjust the delay as needed
 
@@ -54,7 +52,7 @@ useEffect(() => {
         localStorage.setItem("token", content.token);
         setRoles(content.user.roles);
         setName(content.user.name);
-        console.log(content.token);
+        // Close the modal immediately
         setRedirect(true);
       } else if (content.status === 401) {
         setErrMsg("Unauthorized");
@@ -69,26 +67,23 @@ useEffect(() => {
     }
   };
 
-  const modalOpenFunction = () => {
-    console.log("Closing modal");
-    closeLoginModal(); // Close the modal
-  };
 
   return (
     <div>
-      <div
+      {/* <div
         className="min-w-screen h-screen animated fadeIn faster fixed left-0 top-0 flex justify-center items-center inset-0 z-50 outline-none focus:outline-none bg-no-repeat bg-center bg-cover"
         id="loginModal"
-      >
-        <div className="absolute bg-black opacity-80 inset-0 z-0" />
-        <div className="w-full max-w-lg p-3 relative mx-auto my-auto rounded-xl shadow-lg bg-white ">
-          <div className="text-xl cursor-pointer flex justify-end">
+      > */}
+      {/* <div className="absolute bg-black opacity-80 inset-0 z-0" /> */}
+      <br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <div className="w-full max-w-lg p-3 relative mx-auto my-auto rounded-xl shadow-lg bg-white">
+          {/* <div className="text-xl cursor-pointer flex justify-end">
             <IoMdClose
-              onClick={modalOpenFunction}
+              onClick={handleClose}
               className="text-gray-500 
               hover:text-red-500 transition"
             />
-          </div>
+          </div> */}
           <div className="flex w-auto justify-center items-center bg-white space-y-8">
             <div className="w-auto px-8 md:px-32 lg:px-24">
               <p
@@ -167,7 +162,6 @@ useEffect(() => {
                   </span>
                   <Link
                     to="/Register"
-                    onClick={modalOpenFunction}
                     className="text-sm ml-2 hover:text-blue-500 cursor-pointer hover:-translate-y-1 duration-500 transition-all"
                   >
                     Register
@@ -176,8 +170,9 @@ useEffect(() => {
               </form>
             </div>
           </div>
-        </div>
       </div>
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+      {/* </div> */}
     </div>
   );
 };

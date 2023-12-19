@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
+import { Link } from "react-router-dom";
 
 export default function Updateproducts({ match }) {
   //get the product id from url
@@ -77,23 +82,64 @@ export default function Updateproducts({ match }) {
     setFormData({ ...formData, image_urls: newImageUrls });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your form submission logic here
-    console.log("FormData before update:", formData);
-    axios
-      .put(`http://127.0.0.1:8000/api/update-product/${id}`, formData, {
-        headers: {
-          "Content-Type": "application/json",
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  confirmAlert({
+    title: "Confirm Update",
+    message: "Are you sure you want to update this product?",
+    buttons: [
+      {
+        label: "Yes",
+        onClick: () => {
+          // If the user clicks "Yes," proceed with the update
+          axios
+            .put(`http://127.0.0.1:8000/api/update-product/${id}`, formData, {
+              headers: {
+                "Content-Type": "application/json",
+              },
+            })
+            .then((response) => {
+              console.log("Product updated successfully:", response.data);
+
+              // Show a success notification
+              toast.success("Product updated successfully!", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+              });
+
+              // Redirect to another route or perform additional actions
+              history.push("/Adminpanel");
+            })
+            .catch((error) => {
+              console.error("Error updating product:", error.response);
+
+              // Show an error notification
+              toast.error("Error updating product", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: false,
+                draggable: true,
+              });
+            });
         },
-      })
-      .then((response) => {
-        console.log("Product updated successfully:", response.data);
-      })
-      .catch((error) => {
-        console.error("Error updating product:", error.response);
-      });
+      },
+      {
+        label: "No",
+        onClick: () => {
+          // If the user clicks "No," do nothing
+        },
+      },
+    ],
+  });
   };
+  
   return (
     <div>
       <br />
@@ -101,9 +147,13 @@ export default function Updateproducts({ match }) {
       <br />
       <br />
       <br />
-      <br />
       <form onSubmit={handleSubmit} className="bg-gray-200 p-4">
         <h1 className="text-xl">Edit Product</h1>
+        <Link to="/AdminPanel">
+          <button className="bg-[#1d1d1d] text-white px-4 py-2 rounded mt-4 hover:bg-green-600 transition duration-300">
+            Back
+          </button>
+        </Link>
         <br />
         <br />
         {/* Brand */}
@@ -261,10 +311,11 @@ export default function Updateproducts({ match }) {
         <br />
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className="bg-[#1d1d1d] text-white px-4 py-2 rounded"
         >
           Update Product
         </button>
+        <ToastContainer />
       </form>
     </div>
   );

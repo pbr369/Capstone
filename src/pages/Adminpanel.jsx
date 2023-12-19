@@ -6,10 +6,9 @@ import ReactPaginate from "react-paginate";
 export default function Adminpanel() {
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
-  const [perPage] = useState(20); // Adjust the number of items per page as needed
+  const [perPage] = useState(20);
 
   useEffect(() => {
-    // Fetch products from the API when the component mounts
     axios
       .get("http://127.0.0.1:8000/api/products")
       .then((response) => {
@@ -18,16 +17,13 @@ export default function Adminpanel() {
       .catch((error) => {
         console.error("Error fetching products:", error);
       });
-  }, []); // Empty dependency array to run the effect only once on mount
+  }, []); 
 
-  const handleEdit = (id) => { };
   
   const handleDelete = (id) => {
-    // Implement your delete logic, e.g., make a DELETE request to the API
     axios
       .get(`http://127.0.0.1:8000/api/delete-product/${id}`)
       .then((response) => {
-        // Remove the deleted product from the state
         setProducts(products.filter((product) => product.id !== id));
       })
       .catch((error) => {
@@ -35,7 +31,6 @@ export default function Adminpanel() {
       });
   };
 
-  // Pagination
   const pageCount = Math.ceil(products.length / perPage);
 
   const changePage = ({ selected }) => {
@@ -54,11 +49,16 @@ export default function Adminpanel() {
       <br />
       <br />
       <h1 className="text-2xl font-bold mb-4">Product List</h1>
+      <Link to="/AddProducts">
+        <button className="bg-green-500 text-white px-4 py-2 rounded mt-4 hover:bg-green-600 transition duration-300">
+          Add Product
+        </button>
+      </Link>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         {currentPageData.map((product) => (
           <div key={product.id} className="bg-white p-4 rounded-lg shadow-md">
             <img
-              src={product.image_url_1} // Assuming there's an "image" field in your product data
+              src={product.image_url_1} 
               alt={product.product_name}
               className="w-full h-64 object-cover mb-4 rounded-md"
             />

@@ -1,38 +1,75 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Addproducts() {
-    const [formData, setFormData] = useState({
-      brand: "",
-      product_name: "",
-      price: "",
-      stock_quantity: "",
-      rate: "",
-      reviews_num: "",
-      sold: "",
-      category: "Men",
-      description: "",
-      image_urls: ["", "", "", "", ""],
-    });
+  const [formData, setFormData] = useState({
+    brand: "",
+    product_name: "",
+    price: "",
+    stock_quantity: "",
+    rate: "",
+    reviews_num: "",
+    sold: "",
+    category: "Men",
+    description: "",
+    image_urls: ["", "", "", "", ""],
+  });
 
-    const handleInputChange = (e) => {
-      const { name, value } = e.target;
-      setFormData({ ...formData, [name]: value });
-    };
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
-    const handleImageChange = (index, e) => {
-      const newImageUrls = [...formData.image_urls];
-      newImageUrls[index] = e.target.value;
-      setFormData({ ...formData, image_urls: newImageUrls });
-    };
+  const handleImageChange = (index, e) => {
+    const newImageUrls = [...formData.image_urls];
+    newImageUrls[index] = e.target.value;
+    setFormData({ ...formData, image_urls: newImageUrls });
+  };
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      // Add your form submission logic here
-      console.log("Form submitted:", formData);
-    };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Add your form submission logic here
+    console.log("FormData before submission:", formData);
+    axios
+      .post("http://127.0.0.1:8000/api/add-products", formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log("Product added successfully:", response.data);
+        // Show a success notification
+        toast.success("Product added successfully!", {
+          position: "top-right",
+          autoClose: 3000, // Auto close the notification after 3 seconds
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+        });
+      })
+      .catch((error) => {
+        console.error("Error adding product:", error.response);
+      });
+  };
+
   return (
     <div>
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
       <form onSubmit={handleSubmit} className="bg-gray-200 p-4">
+        <h1 className="text-2xl">Add Products</h1>
+        <Link to="/AdminPanel">
+          <button className="bg-[#1d1d1d] text-white px-4 py-2 rounded mt-4 hover:bg-green-600 transition duration-300">
+            Back
+          </button>
+        </Link>
         <br />
         <br />
         {/* Brand */}
@@ -172,7 +209,7 @@ export default function Addproducts() {
               <img
                 src={formData.image_urls[index - 1]}
                 alt={`Preview ${index}`}
-                className="w-full h-auto max-h-32 object-cover rounded mt-2"
+                className="w-96 h-96 object-cover rounded mt-2"
               />
             )}
             <br />
@@ -181,7 +218,7 @@ export default function Addproducts() {
         ))}
         <button
           type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded"
+          className="bg-[#1d1d1d] text-white px-4 py-2 rounded"
         >
           Add Product
         </button>
@@ -190,6 +227,7 @@ export default function Addproducts() {
         <br />
         <br />
       </form>
+      <ToastContainer />
     </div>
   );
 }

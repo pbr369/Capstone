@@ -25,6 +25,10 @@ export default function UserProfileSidebar({ name, roles = [], closeUserProfile 
       title: "Change Password",
       link: "/Updatepassword",
     },
+    {
+      title: "Orders",
+      link: "/Orders",
+    },
     // Add the "Admin Panel" link conditionally based on the user's role
     ...(roles.includes("admin")
       ? [

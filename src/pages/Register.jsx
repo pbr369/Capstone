@@ -43,6 +43,8 @@ export default function Register() {
           // Handle network or other errors
           console.error("Error during registration:", error);
         }
+
+        closeModal();
       };
 
   if (redirect) {

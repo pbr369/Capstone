@@ -32,6 +32,7 @@ import Addproducts from "./pages/Addproducts";
 import Updateproducts from "./pages/Updateproducts";
 import Updatepassword from "./pages/Updatepassword";
 import Updateprofile from "./pages/Updateprofile";
+import Orders from "./components/Orders";
 
 
 export default function App() {
@@ -81,6 +82,7 @@ export default function App() {
           <Route path="/Bag" element={<Bag />} />
           <Route path="/Updatepassword" element={<Updatepassword />} />
           <Route path="/Updateprofile" element={<Updateprofile />} />
+          <Route path="/Orders" element={<Orders />} />
           <Route
             path="/Adminpanel"
             element={

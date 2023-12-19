@@ -40,10 +40,16 @@ export default function Navbar({ name, setName, roles, setRoles }) {
     setIsSidebarVisible(!isSidebarVisible);
   };
 
+  // Add a new function to close the modal
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   // Assuming you have a function to clear cookies
   function clearCookies() {
     document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   }
+
 
   async function logout() {
     try {
@@ -133,10 +139,9 @@ export default function Navbar({ name, setName, roles, setRoles }) {
                 />
               ) : (
                 // Render login button if the user is not logged in
-                <FaRegUser
-                  onClick={toggleModal}
-                  className="text-2xl text-white"
-                />
+                <Link to={"/Login"}>
+                  <FaRegUser className="text-2xl text-white" />
+                </Link>
               )}
             </div>
             {/* Conditionally render the logout button if the user is logged in */}
@@ -178,13 +183,11 @@ export default function Navbar({ name, setName, roles, setRoles }) {
           </div>
         </div>
       </div>
-      {modalOpen && (
-        <Login
-          closeLoginModal={toggleModal}
+      {/* {<Login
           setName={setName}
           setRoles={setRoles}
         />
-      )}
+      } */}
       {wishlistOpen && <Wishlist />}
       {hamburgerOpen && <HamburgerMenu closeHamburger={hamtoggleModal} />}
       {isSidebarVisible && (

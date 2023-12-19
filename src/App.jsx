@@ -33,32 +33,44 @@ import Updateproducts from "./pages/Updateproducts";
 import Updatepassword from "./pages/Updatepassword";
 import Updateprofile from "./pages/Updateprofile";
 import Orders from "./components/Orders";
+import PayButton from "./components/PayButton";
 
 
 export default function App() {
   const [name, setName] = useState("");
   const [roles, setRoles] = useState([]);
+  const [userId, setUserId] = useState("");
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-      (async () => {
-        try {
-          const response = await fetch("http://localhost:8000/api/user", {
-            headers: { "Content-Type": "application/json" },
-            credentials: "include",
-          });
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/api/user", {
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        });
 
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-
-          const content = await response.json();
-          setName(content.name);
-          setRoles(content.roles);
-        } catch (error) {
-          console.error("Error fetching user data:", error);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
         }
-      })();
-    }, []);
+
+        const content = await response.json();
+        setUserId(content.id); // Adjust this based on your actual user data structure
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>; // You can replace this with a loading indicator
+  }
+
+  console.log('App.jsx - Rendering with UserId:', userId);
   
   return (
     <div>
@@ -103,7 +115,7 @@ export default function App() {
           <Route path="/Register" element={<Register />} />
           <Route path="product/:id" element={<ProductDetails />} />
         </Routes>
-        <Sidebar />
+        <Sidebar userId={userId} setUserId={setUserId} />
         <Footer />
       </Router>
     </div>

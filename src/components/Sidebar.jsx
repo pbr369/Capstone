@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 //
 import { Link } from "react-router-dom";
 //icon
@@ -13,29 +13,22 @@ import { CartContext } from "../contexts/CartContext";
 import Dialog from "../components/Dialog";
 import PayButton from "./PayButton";
 
-export default function Sidebar() {
+export default function Sidebar({ userId, setUserId }) {
   const { isOpen, handleClose } = useContext(SidebarContext);
   const { cart, clearCart, total, itemAmount, handleDelete } =
     useContext(CartContext);
   
   function formatPrice(price) {
-    // Convert the price to a string
     const priceString = price.toString();
-
-    // Split the string into whole and decimal parts
     const [wholePart, decimalPart] = priceString.split(".");
-
-    // Add commas to the whole part for thousands
     const formattedWholePart = wholePart.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-
-    // Combine the whole and decimal parts, and add the PHP symbol
     const formattedPrice = `₱${formattedWholePart}${
       decimalPart ? `.${decimalPart}` : ""
     }`;
 
     return formattedPrice;
   }
-  
+
   return (
     <div>
       <div
@@ -78,7 +71,8 @@ export default function Sidebar() {
           >
             {/* total */}
             <div className="uppercase font-semibold">
-              <span className="mr-2">Total:</span>{formatPrice(total)}
+              <span className="mr-2">Total:</span>
+              {formatPrice(total)}
             </div>
             {/* clear cart */}
             <div
@@ -91,7 +85,7 @@ export default function Sidebar() {
               <FiTrash2 />
             </div>
           </div>
-          <PayButton cartItem={cart}></PayButton>
+          <PayButton cartItem={cart} userId={userId} setUserId={setUserId} />
         </div>
       </div>
     </div>

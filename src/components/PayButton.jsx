@@ -14,7 +14,7 @@ const PayButton = ({ userId, cartItems }) => {
         customer_id: userId, // Include the user ID in the request payload
       })
       .then((response) => {
-        console.log("Axios response:", response);
+        console.log("user id:", userId);
         if (response.data.url) {
           window.location.href = response.data.url;
         }

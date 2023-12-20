@@ -3,25 +3,56 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { ProductContext } from "../contexts/ProductContext";
 
-const Orders = ({ userId }) => {
-  const [selectedCategory, setSelectedCategory] = useState("To Ship");
+const Ordersadmin = () => {
+  const [selectedCategory, setSelectedCategory] = useState("ToShip");
   const [orders, setOrders] = useState([]);
   const { products } = useContext(ProductContext);
 
   const handleCategoryChange = (category) => {
     setSelectedCategory(category);
-  };
+    };
+    
+    const handleMarkAsShipped = async (orderId) => {
+      try {
+        // Make an API call to mark the order as shipped
+        await axios.put(`http://127.0.0.1:8000/api/mark-as-shipped/${orderId}`);
+
+        // Refetch the data to update the component
+        fetchData();
+      } catch (error) {
+        console.error("Error marking order as shipped:", error);
+      }
+    };
+
+    const handleCancelOrder = async (orderId) => {
+      try {
+        // Make an API call to cancel the order
+        await axios.put(`http://127.0.0.1:8000/api/cancel-order/${orderId}`);
+
+        // Refetch the data to update the component
+        fetchData();
+      } catch (error) {
+        console.error("Error canceling order:", error);
+      }
+    };
+
+    const handleCompleteOrder = async (orderId) => {
+      try {
+        // Make an API call to cancel the order
+        await axios.put(`http://127.0.0.1:8000/api/complete-order/${orderId}`);
+
+        // Refetch the data to update the component
+        fetchData();
+      } catch (error) {
+        console.error("Error canceling order:", error);
+      }
+    };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/orders", {
-          params: {
-            category: selectedCategory,
-            id: userId,
-          },
-        });
-        console.log("Fetched orders data:", response.data);
+        const response = await axios.get(
+          `http://127.0.0.1:8000/api/showorders/${selectedCategory}`);
 
         const ordersWithProductInfo = response.data.map((order) => {
           const product = products.find(
@@ -39,13 +70,15 @@ const Orders = ({ userId }) => {
         setOrders(ordersWithProductInfo);
       } catch (error) {
         if (error.response) {
-          // Handle errors
+          console.error("Error response:", error.response.data);
+        } else {
+          console.error("Error:", error.message);
         }
       }
     };
 
     fetchData();
-  }, [selectedCategory, products, userId]);
+  }, [selectedCategory, products]);
 
   return (
     <div className="p-6">
@@ -53,33 +86,47 @@ const Orders = ({ userId }) => {
       <br />
       <br />
       <br />
+      <Link to="/AdminPanel">
+        <button className="bg-[#1d1d1d] text-white px-4 py-2 rounded mt-4 hover:bg-green-600 transition duration-300">
+          Back
+        </button>
+      </Link>
       <div className="flex space-x-4 bg-gray-800 text-white p-4">
         <Link
-          to="/orders"
+          to="/Ordersadmin"
           className={`${
-            selectedCategory === "To Ship" ? "border-b-2 border-white" : ""
+            selectedCategory === "toship" ? "border-b-2 border-white" : ""
           } px-4 py-2`}
-          onClick={() => handleCategoryChange("To Ship")}
+          onClick={() => handleCategoryChange("toship")}
         >
           To Ship
         </Link>
         <Link
-          to="/orders"
+          to="/Ordersadmin"
           className={`${
-            selectedCategory === "To Receive" ? "border-b-2 border-white" : ""
+            selectedCategory === "toreceive" ? "border-b-2 border-white" : ""
           } px-4 py-2`}
-          onClick={() => handleCategoryChange("To Receive")}
+          onClick={() => handleCategoryChange("toreceive")}
         >
           To Received
         </Link>
         <Link
-          to="/orders"
+          to="/Ordersadmin"
           className={`${
-            selectedCategory === "Completed" ? "border-b-2 border-white" : ""
+            selectedCategory === "completed" ? "border-b-2 border-white" : ""
           } px-4 py-2`}
-          onClick={() => handleCategoryChange("Completed")}
+          onClick={() => handleCategoryChange("completed")}
         >
           Completed Orders
+        </Link>
+        <Link
+          to="/Ordersadmin"
+          className={`${
+            selectedCategory === "cancelled" ? "border-b-2 border-white" : ""
+          } px-4 py-2`}
+          onClick={() => handleCategoryChange("cancelled")}
+        >
+          Cancelled Orders
         </Link>
       </div>
 
@@ -141,4 +188,4 @@ const Orders = ({ userId }) => {
   );
 };
 
-export default Orders;
+export default Ordersadmin;

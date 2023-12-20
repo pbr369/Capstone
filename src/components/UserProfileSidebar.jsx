@@ -9,7 +9,6 @@ export default function UserProfileSidebar({ name, roles = [], closeUserProfile 
   };
 
   useEffect(() => {
-    console.log("User roles:", roles);
   }, [roles]);
 
   const menuItems = [

@@ -8,15 +8,10 @@ export const AuthProvider = ({ children }) => {
   const [userRoles, setUserRoles] = useState([]);
 
   useEffect(() => {
-    // Get the token from cookies
-    const tokenCookie = document.cookie
-      .split("; ")
-      .find((row) => row.startsWith("jwt="))
-      ?.split("=")[1];
+    const token = localStorage.getItem("jwt");
 
-    if (tokenCookie) {
-      // Include the token in the Authorization header for authenticated requests
-      axios.defaults.headers.common["Authorization"] = `Bearer ${tokenCookie}`;
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       setIsAuthenticated(true);
     } else {
       setIsAuthenticated(false);
@@ -31,7 +26,7 @@ export const AuthProvider = ({ children }) => {
         const user = response.data;
 
         setIsAuthenticated(true);
-        setUserRoles(user.roles ? [user.roles] : []); // Assuming roles is a string, convert it to an array
+        setUserRoles(user.roles ? [user.roles] : []);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -41,17 +36,19 @@ export const AuthProvider = ({ children }) => {
   }, []); // Empty
 
   const login = (userData) => {
-    // Your authentication logic here
-    // Set isAuthenticated and userRoles based on the userData
     setIsAuthenticated(true);
-    setUserRoles(userData.roles || []); // Assuming your user data has a roles property
+    setUserRoles(userData.roles || []);
+
+    // Store the token in local storage for persistence
+    localStorage.setItem("jwt", userData.token);
   };
 
   const logout = () => {
-    // Your logout logic here
-    // Reset isAuthenticated and userRoles
     setIsAuthenticated(false);
     setUserRoles([]);
+
+    // Remove the token from local storage
+    localStorage.removeItem("jwt");
   };
 
   return (

@@ -29,6 +29,8 @@ export default function Sidebar({ userId, setUserId }) {
     return formattedPrice;
   }
 
+  console.log("user id:", userId);
+
   return (
     <div>
       <div

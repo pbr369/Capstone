@@ -54,11 +54,16 @@ export default function Adminpanel() {
           Add Product
         </button>
       </Link>
+      <Link to="/Ordersadmin">
+        <button className="bg-green-500 text-white px-4 py-2 rounded mt-4 hover:bg-green-600 transition duration-300 mx-5">
+          Manage Orders
+        </button>
+      </Link>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
         {currentPageData.map((product) => (
           <div key={product.id} className="bg-white p-4 rounded-lg shadow-md">
             <img
-              src={product.image_url_1} 
+              src={product.image_url_1}
               alt={product.product_name}
               className="w-full h-64 object-cover mb-4 rounded-md"
             />
